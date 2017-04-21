@@ -1,0 +1,1 @@
+public enum Language {en, de, fr, all}
