@@ -2,8 +2,8 @@ using System;
 
 public static class Utility 
 {
-    private static string CognitiveServicesApiKeyFileName = "CognitiveServicesTextApiKey";
-    private static string NewsApiKeyFileName = "NewsApiKey";
+    private static string CognitiveServicesApiKeyFileName = "CognitiveServicesTextApi.key";
+    private static string NewsApiKeyFileName = "NewsApi.key";
     public static string LoadCognitiveServicesTextApiKey() 
     {
         try
