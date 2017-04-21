@@ -50,7 +50,7 @@ public class CognitiveServicesTextAnalysis : ICognitiveServicesTextAnalysis
     }
 
 
-private readonly string[] supportedLanguages = {"en","es","fr","pt"};
+    private readonly string[] supportedLanguages = {"en","es","fr","pt"};
     public async Task<IEnumerable<Article>> SetSentiments(IEnumerable<Article> articles, TextField field)
     {
 
@@ -71,7 +71,7 @@ private readonly string[] supportedLanguages = {"en","es","fr","pt"};
                 }
             }
             else{
-                // Console.WriteLine($"{a.Language} not supported");
+                // Manager.WriteLine($"{a.Language} not supported");
                 a.TitleSentiment = -1;
             }
         }
@@ -120,7 +120,7 @@ private readonly string[] supportedLanguages = {"en","es","fr","pt"};
                 }
             }
             else{
-             //   Console.WriteLine($"{a.Language} not supported");
+             //   Manager.WriteLine($"{a.Language} not supported");
                 a.TitleKeyPhrases = null;
             }
         }
@@ -147,10 +147,6 @@ private readonly string[] supportedLanguages = {"en","es","fr","pt"};
     }
    
 
-    /// <summary>
-    /// Generic catch and throw that detects errors on the response body
-    /// </summary>
-    /// <param name="response"></param>
     private void CatchAndThrow(JObject response, TextRequest request)
     {
         if (response["errors"] != null && response["errors"].Children().Any())

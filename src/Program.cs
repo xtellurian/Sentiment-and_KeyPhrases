@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace NET_Sandbox
 {
@@ -10,6 +8,7 @@ namespace NET_Sandbox
         {   
 
            var manager = new Manager();
+           Manager.Output = line => Console.WriteLine(line);
            var task = manager.Run();
            Console.Read();
           

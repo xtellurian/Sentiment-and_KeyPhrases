@@ -33,13 +33,13 @@ public class Source : SourceBase
             foreach(var a in Articles){
                 a.Language = language;
             }
-            Console.WriteLine($"Loaded {Articles.Count} articles from {name}");
+            Manager.WriteLine($"Loaded {Articles.Count} articles from {name}");
             return Articles.Count;
          }  
         catch(HttpRequestException e)
         {
-            Console.WriteLine("\nException Caught!");    
-            Console.WriteLine("Message :{0} ",e.Message);
+            Manager.WriteLine("\nException Caught!");    
+            Manager.WriteLine("Message :{0} " + e.Message);
         }
 
         client.Dispose();
@@ -73,8 +73,8 @@ public class Source : SourceBase
          }  
         catch(HttpRequestException e)
         {
-            Console.WriteLine("\nException Caught!");    
-            Console.WriteLine("Message :{0} ",e.Message);
+            Manager.WriteLine("\nException Caught!");    
+            Manager.WriteLine("Message :{0} " + e.Message);
         }
 
         client.Dispose();

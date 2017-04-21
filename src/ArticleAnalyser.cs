@@ -12,7 +12,7 @@ public class ArticleAnalyser
     }
     public async Task<IEnumerable<Article>> AnalyseArticlesBy100(IEnumerable<Article> articles)
     {
-        // assumes max 100 articles
+        // needs max 100 articles
         if(articles.Count() > 100 ) throw new ArgumentException("More than 100 articles");
 
         
@@ -61,7 +61,7 @@ public class ArticleAnalyser
        // Aggregates.Sort((pair1,pair2) => pair2.TotalSentiment.CompareTo(pair1.TotalSentiment));
 
         for(var i=0; i<=9;i++){
-            Console.WriteLine(Aggregates[i]);
+            Manager.WriteLine(Aggregates[i].ToString());
         }
 
 
