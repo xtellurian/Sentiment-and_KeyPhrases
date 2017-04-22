@@ -1,17 +1,17 @@
-﻿using System;
+﻿// using System;
 
-namespace Rian.Cognitive 
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {   
+// namespace Rian.Cognitive 
+// {
+//     class Program
+//     {
+//         static void Main(string[] args)
+//         {   
 
-           var manager = new Manager();
+//            var manager = new Manager();
 
-           var task = manager.Run();
-           Console.Read();
+//            var task = manager.Run();
+//            Console.Read();
           
-        }
-    }
-}
+//         }
+//     }
+// }
