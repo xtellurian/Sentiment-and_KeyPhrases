@@ -35,7 +35,7 @@ namespace Sentiment_And_KeyPhrases.Controllers
             return View();
         }
 
-        public void WriteLine(string line)
+        public void WriteOut(string line)
         {
             System.Diagnostics.Debug.WriteLine(line);
              _data.Add(line);
@@ -44,7 +44,6 @@ namespace Sentiment_And_KeyPhrases.Controllers
         public void Log(string line)
         {
             System.Diagnostics.Debug.WriteLine(line);
-            _data.Add(line);
         }
     }
 }

@@ -10,10 +10,12 @@ namespace Rian.Cognitive {
     {
         private ICognitiveServicesTextAnalysis _congitiveService;
         private ILogger _logger;
-        public ArticleAnalyser(ICognitiveServicesTextAnalysis cognitiveService, ILogger logger)
+        private IOut _output;
+        public ArticleAnalyser(ICognitiveServicesTextAnalysis cognitiveService, ILogger logger, IOut output)
         {
             _congitiveService = cognitiveService;
             _logger = logger;
+            _output = output;
         }
         public async Task<IEnumerable<Article>> AnalyseArticlesBy100(IEnumerable<Article> articles)
         {
@@ -66,7 +68,7 @@ namespace Rian.Cognitive {
         // Aggregates.Sort((pair1,pair2) => pair2.TotalSentiment.CompareTo(pair1.TotalSentiment));
 
             for(var i=0; i<=9;i++){
-                _logger.Log(Aggregates[i].ToString());
+                _output.WriteOut(Aggregates[i].ToString());
             }
 
 

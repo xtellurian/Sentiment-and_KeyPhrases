@@ -2,6 +2,6 @@ namespace Rian.Cognitive {
 
     public interface IOut 
     {
-        void WriteLine (string line);
+        void WriteOut (string line);
     }
 }

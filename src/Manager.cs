@@ -51,7 +51,7 @@ namespace Rian.Cognitive {
             new CognitiveServicesTextAnalysis(key);
 
 
-            var analyser = new ArticleAnalyser(textAnalysis, _logger);
+            var analyser = new ArticleAnalyser(textAnalysis, _logger, _output);
 
             await analyser.AnalyseAll(sourceResponse.sources);
         }
@@ -67,7 +67,7 @@ namespace Rian.Cognitive {
             await Task.WhenAll(tasks);
         }
 
-        public void WriteLine(string line)
+        public void WriteOut(string line)
         {
             Console.WriteLine(line);
         }
