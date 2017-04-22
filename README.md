@@ -6,7 +6,7 @@ Taking news article summaries from around the world and generating summaries usi
 
 1) git pull https://github.com/xtellurian/Sentiment-and_KeyPhrases
 
-2) Place Api Keys in 'CognitiveServicesTextApi.key' and NewsApi.key
+2) Place Api Keys in 'CognitiveServicesTextApi.key' and 'NewsApi.key'
 
 3) dotnet restore
 
