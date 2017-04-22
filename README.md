@@ -29,8 +29,13 @@ https://github.com/ealsur/CognitiveServicesText
 
 https://newsapi.org
 
+# To Do
 
-# Output
+- [ ] Implement Azure Topic Detection
+- [ ] Make a nice output data structure
+- [ ] Front End
+
+# Sample Output
 
 COUNT x PHRASE -- SENTIMENT
 
