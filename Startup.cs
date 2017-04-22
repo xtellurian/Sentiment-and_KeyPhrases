@@ -29,6 +29,10 @@ namespace Sentiment_And_KeyPhrases
         {
             // Add framework services.
             services.AddMvc();
+            Rian.Cognitive.Utility
+                .SetNewsApiKey(Configuration["NewsApiKey"]);
+            Rian.Cognitive.Utility
+                .SetCognitiveServicesTextApiKey(Configuration["CognitiveServicesTextApiKey"]);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

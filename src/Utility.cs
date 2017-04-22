@@ -4,10 +4,25 @@ namespace Rian.Cognitive {
         
     public static class Utility 
     {
+        private static string _newsApiKey;
+        public static void SetNewsApiKey(string key){
+            _newsApiKey = key;
+        }
+        private static string _cognitiveServicesTextApiKey;
+        public static void SetCognitiveServicesTextApiKey(string key){
+            _cognitiveServicesTextApiKey = key;
+        }
+
+
         private static string CognitiveServicesApiKeyFileName = "CognitiveServicesTextApi.key";
         private static string NewsApiKeyFileName = "NewsApi.key";
         public static string LoadCognitiveServicesTextApiKey() 
         {
+            if (!string.IsNullOrEmpty(_cognitiveServicesTextApiKey)) {
+                return _cognitiveServicesTextApiKey;
+            }
+                
+            
             try
             {
                 string text = System.IO.File.ReadAllText(CognitiveServicesApiKeyFileName);
@@ -22,10 +37,13 @@ namespace Rian.Cognitive {
 
         public static string LoadNewsApiKey() 
         {
+            if (!string.IsNullOrEmpty(_newsApiKey)){
+                return _newsApiKey;
+            }
             try
             {
                 string text = System.IO.File.ReadAllText(NewsApiKeyFileName);
-            return text;
+                return text;
             }
             catch(Exception ex)
             {
