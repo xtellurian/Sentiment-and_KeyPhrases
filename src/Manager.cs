@@ -9,16 +9,16 @@ namespace Rian.Cognitive {
         
     public class Manager: ILogger, IOut
     {
-        private ILogger logger;
-        private IOut output;
+        private ILogger _logger;
+        private IOut _output;
 
-        public Manager()
+        public Manager(ILogger logger = null, IOut output = null)
         {
             // set the logger and the output here
             // you can set 'this for both if you want console out
 
-            logger = this;
-            output = this;
+            _logger = logger ?? this;
+            _output = output ?? this;
         }
 
         public void Log(string line)
@@ -28,11 +28,11 @@ namespace Rian.Cognitive {
 
         public async Task Run ()
         {
-            if (logger == null)
+            if (_logger == null)
             {
                 throw new NullReferenceException("Logger not set");
             }
-            if (output == null)
+            if (_output == null)
             {
                 throw new NullReferenceException("output is null");
             }
@@ -51,7 +51,7 @@ namespace Rian.Cognitive {
             new CognitiveServicesTextAnalysis(key);
 
 
-            var analyser = new ArticleAnalyser(textAnalysis, logger);
+            var analyser = new ArticleAnalyser(textAnalysis, _logger);
 
             await analyser.AnalyseAll(sourceResponse.sources);
         }
@@ -76,9 +76,9 @@ namespace Rian.Cognitive {
         {
             Source.SetApiKey(Utility.LoadNewsApiKey());
 
-            var sourceResponse = await Source.GetSourcesAsync(logger, Language.en);
+            var sourceResponse = await Source.GetSourcesAsync(_logger, Language.en);
             
-            logger.Log($"Found {sourceResponse.sources.Count} Sources");
+            _logger.Log($"Found {sourceResponse.sources.Count} Sources");
 
             return sourceResponse;
         }
