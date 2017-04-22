@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NET_Sandbox
+namespace Rian.Cognitive 
 {
     class Program
     {
