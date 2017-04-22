@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Rian.Cognitive{
+namespace Rian.Cognitive {
 
 
     public class ArticleAnalyser 
     {
         private ICognitiveServicesTextAnalysis _congitiveService;
-        public ArticleAnalyser(ICognitiveServicesTextAnalysis cognitiveService)
+        private ILogger _logger;
+        public ArticleAnalyser(ICognitiveServicesTextAnalysis cognitiveService, ILogger logger)
         {
             _congitiveService = cognitiveService;
+            _logger = logger;
         }
         public async Task<IEnumerable<Article>> AnalyseArticlesBy100(IEnumerable<Article> articles)
         {
@@ -64,7 +66,7 @@ namespace Rian.Cognitive{
         // Aggregates.Sort((pair1,pair2) => pair2.TotalSentiment.CompareTo(pair1.TotalSentiment));
 
             for(var i=0; i<=9;i++){
-                Manager.WriteLine(Aggregates[i].ToString());
+                _logger.Log(Aggregates[i].ToString());
             }
 
 

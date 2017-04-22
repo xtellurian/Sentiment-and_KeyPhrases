@@ -8,7 +8,7 @@ namespace Rian.Cognitive
         {   
 
            var manager = new Manager();
-           Manager.Output = line => Console.WriteLine(line);
+
            var task = manager.Run();
            Console.Read();
           

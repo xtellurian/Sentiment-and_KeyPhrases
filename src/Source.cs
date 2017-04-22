@@ -14,6 +14,7 @@ namespace Rian.Cognitive {
 
         public List<Article> Articles {get; private set;}
 
+        public ILogger Logger {get;set;}
         public async Task<int> LoadArticles()
         {
             if(string.IsNullOrEmpty(_apiKey)) throw new NullReferenceException("Api Key is Null");
@@ -35,13 +36,13 @@ namespace Rian.Cognitive {
                 foreach(var a in Articles){
                     a.Language = language;
                 }
-                Manager.WriteLine($"Loaded {Articles.Count} articles from {name}");
+                Logger?.Log($"Loaded {Articles.Count} articles from {name}");
                 return Articles.Count;
             }  
             catch(HttpRequestException e)
             {
-                Manager.WriteLine("\nException Caught!");    
-                Manager.WriteLine("Message :{0} " + e.Message);
+                Logger?.Log("\nException Caught!");    
+                Logger?.Log("Message :{0} " + e.Message);
             }
 
             client.Dispose();
@@ -53,7 +54,7 @@ namespace Rian.Cognitive {
             _apiKey = apiKey;
         }
 
-        public static async Task<SourceResponse> GetSourcesAsync(Language language = Language.all)
+        public static async Task<SourceResponse> GetSourcesAsync(ILogger logger, Language language = Language.all)
         {
         // Create a New HttpClient object.
             HttpClient client = new HttpClient();
@@ -71,12 +72,15 @@ namespace Rian.Cognitive {
 
                 var result = JsonConvert.DeserializeObject<SourceResponse>(responseBody);
                 client.Dispose();
+                foreach(var source in result.sources){
+                    source.Logger = logger;
+                }
                 return result;
             }  
             catch(HttpRequestException e)
             {
-                Manager.WriteLine("\nException Caught!");    
-                Manager.WriteLine("Message :{0} " + e.Message);
+                logger?.Log("\nException Caught!");    
+                logger?.Log("Message :{0} " + e.Message);
             }
 
             client.Dispose();
