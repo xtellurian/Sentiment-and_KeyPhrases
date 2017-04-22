@@ -2,13 +2,15 @@
 Playing around with MS Cognitive Services. 
 Taking news article summaries from around the world and generating summaries using key phrases and sentiment detection.
 
-#Getting Started
+# Getting Started
 
-1) `` git pull https://github.com/xtellurian/Sentiment-and_KeyPhrases
+1) ``` git pull https://github.com/xtellurian/Sentiment-and_KeyPhrases
 
-2) `` dotnet restore
+2) Place Api Keys in 'CognitiveServicesTextApi.key' and NewsApi.key
 
-3) `` dotnet run
+3) ``` dotnet restore
+
+4) ``` dotnet run
 
 
 

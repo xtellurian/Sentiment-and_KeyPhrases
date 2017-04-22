@@ -27,10 +27,9 @@ public class Manager
             
             await Task.WhenAll(tasks);
 
-            
-
             var key = Utility.LoadCognitiveServicesTextApiKey();
-           ICognitiveServicesTextAnalysis textAnalysis = new CognitiveServicesTextAnalysis(key);
+           ICognitiveServicesTextAnalysis textAnalysis = 
+            new CognitiveServicesTextAnalysis(key);
            
 
             var analyser = new ArticleAnalyser(textAnalysis);
