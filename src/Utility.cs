@@ -21,7 +21,6 @@ namespace Rian.Cognitive {
             if (!string.IsNullOrEmpty(_cognitiveServicesTextApiKey)) {
                 return _cognitiveServicesTextApiKey;
             }
-                
             
             try
             {
@@ -50,6 +49,24 @@ namespace Rian.Cognitive {
                 throw new Exception("Failed to read file with name " + NewsApiKeyFileName, ex);
             }
             
+        }
+
+        private static string StorageConnectionStringFileName = "StorageConnectionString.key";
+        private static string StorageConnectionString;
+        public static string LoadStorageConnectionString() 
+        {
+            if (!string.IsNullOrEmpty(StorageConnectionString)){
+                return StorageConnectionString;
+            }
+            try
+            {
+                string text = System.IO.File.ReadAllText(StorageConnectionStringFileName);
+                return text;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Failed to read file with name " + StorageConnectionStringFileName, ex);
+            }
         }
     }
 }

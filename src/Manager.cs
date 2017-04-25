@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.WindowsAzure.Storage;
+using Rian.AzureStorage;
 
 namespace Rian.Cognitive {
         
@@ -56,9 +58,19 @@ namespace Rian.Cognitive {
 
              var service = new TopicDetectionService(Utility.LoadCognitiveServicesTextApiKey());
              var request = TopicDetectionRequest.CreateRequest(articles);
-             var response = await service.DetectTopics(request);
-             _output.WriteOut("Printing Info:");
-             PrintInfo(response, 10);
+             var location = await service.Post(request);
+             _logger.Log(location);
+
+             var result = await service.GetProcessedDocuments(location);
+             
+             PrintInfo(result, 10);
+
+             var storageAccount = CloudStorageAccount.Parse(Utility.LoadStorageConnectionString());
+             var blob = new UploadToBlobStorage(result, 
+                "test", "testuri", 
+                new Dictionary<string,string>() );
+
+                await blob.Apply(storageAccount);
         }
 
         private void PrintInfo(TopicDetectionResponse response, int count){
