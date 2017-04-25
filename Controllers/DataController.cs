@@ -18,7 +18,7 @@ namespace Sentiment_And_KeyPhrases.Controllers
 
             _manager = new Manager(this, this);
             
-            task = _manager.Run();
+            task = _manager.RunIndependents();
 
         }
         public IActionResult Index()
