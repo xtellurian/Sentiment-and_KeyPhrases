@@ -1,0 +1,22 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "name": "req",
+      "type": "httpTrigger",
+      "direction": "in",
+      "route": "PollAndStore/dataLocation/",
+      "methods": [
+        "get"
+      ]
+    },
+    {
+      "type": "queue",
+      "name": "outputQueue",
+      "queueName": "location-queue",
+      "connection": "newstopic852_STORAGE",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}

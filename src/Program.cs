@@ -9,7 +9,7 @@ namespace Rian.Cognitive
 
            var manager = new Manager();
 
-           var task = manager.AnalyseArticles2();;
+           var task = manager.RunTopicDetection();;
            Console.Read();
           
         }

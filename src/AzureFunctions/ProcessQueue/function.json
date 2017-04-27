@@ -1,0 +1,19 @@
+{
+  "bindings": [
+    {
+      "name": "myQueueItem",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "location-queue",
+      "connection": "newstopic852_STORAGE"
+    },
+    {
+      "type": "blob",
+      "name": "$return",
+      "path": "outcontainer/topic-detection",
+      "connection": "newstopic852_STORAGE",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}

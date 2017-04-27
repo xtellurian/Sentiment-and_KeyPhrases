@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
+using Rian.AzureFunctions;
 using Rian.AzureStorage;
 
 namespace Rian.Cognitive {
@@ -46,7 +47,9 @@ namespace Rian.Cognitive {
             await AnalyseArticles(sourceResponse);
         }
 
-        public async Task AnalyseArticles2()
+        private static string TopicDetectionContainer = "outcontainer";
+        private static string TopicDetectionBlob = "topic-detection";
+        public async Task RunTopicDetection()
         {
              var sourceResponse = await LoadSources();
 
@@ -61,16 +64,19 @@ namespace Rian.Cognitive {
              var location = await service.Post(request);
              _logger.Log(location);
 
-             var result = await service.GetProcessedDocuments(location);
-             
-             PrintInfo(result, 10);
+             var azureFunction = Utility.GetPollAndStoreAzureFunction();
+             var upload = new PollAndStoreData(location, azureFunction);
+             await upload.Run();
+            var returned = await DownloadLastTopicDetection();
+            Console.WriteLine("Returned: ");
+            PrintInfo(returned, 10);
+        }
 
-             var storageAccount = CloudStorageAccount.Parse(Utility.LoadStorageConnectionString());
-             var blob = new UploadToBlobStorage(result, 
-                "test", "testuri", 
-                new Dictionary<string,string>() );
-
-                await blob.Apply(storageAccount);
+        public async Task<TopicDetectionResponse> DownloadLastTopicDetection()
+        {
+            var storage = new DownloadFromBlobStorage(Utility.LoadStorageConnectionString());
+            var response = await storage.DownloadFileAs<TopicDetectionResponse>(TopicDetectionBlob, TopicDetectionContainer);
+            return response;
         }
 
         private void PrintInfo(TopicDetectionResponse response, int count){

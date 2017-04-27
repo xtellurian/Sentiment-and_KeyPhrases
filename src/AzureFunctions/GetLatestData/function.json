@@ -1,0 +1,27 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "name": "req",
+      "type": "httpTrigger",
+      "direction": "in",
+      "route": "HttpTriggerCSharp/Latest/",
+      "methods": [
+        "get"
+      ]
+    },
+    {
+      "name": "$return",
+      "type": "http",
+      "direction": "out"
+    },
+    {
+      "type": "blob",
+      "name": "inputBlob",
+      "path": "outcontainer/topic-detection",
+      "connection": "newstopic852_STORAGE",
+      "direction": "in"
+    }
+  ],
+  "disabled": false
+}
