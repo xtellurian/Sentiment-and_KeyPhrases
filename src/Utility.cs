@@ -51,17 +51,32 @@ namespace Rian.Cognitive {
             
         }
 
-        private static string AzureFunctionFileName = "AzureFunction.key";
-        public static string GetPollAndStoreAzureFunction() 
+
+        private static string GetLatestDataFileName = "GetLatestDataFunction.key";
+        public static string GetLatestDataFunction() 
         {
              try
             {
-                string text = System.IO.File.ReadAllText(AzureFunctionFileName);
+                string text = System.IO.File.ReadAllText(GetLatestDataFileName);
                 return text;
             }
             catch(Exception ex)
             {
-                throw new Exception("Failed to read file with name " + StorageConnectionStringFileName, ex);
+                throw new Exception("Failed to read file with name " + GetLatestDataFileName, ex);
+            }
+        }
+
+        private static string PollAndStoreFunctionFileName = "PollAndStoreFunction.key";
+        public static string GetPollAndStoreAzureFunction() 
+        {
+             try
+            {
+                string text = System.IO.File.ReadAllText(PollAndStoreFunctionFileName);
+                return text;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Failed to read file with name " + PollAndStoreFunctionFileName, ex);
             }
         }
         private static string StorageConnectionStringFileName = "StorageConnectionString.key";

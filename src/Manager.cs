@@ -1,12 +1,8 @@
-
-
-
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
 using Rian.AzureFunctions;
-using Rian.AzureStorage;
 
 namespace Rian.Cognitive {
         
@@ -65,7 +61,7 @@ namespace Rian.Cognitive {
              _logger.Log(location);
 
              var azureFunction = Utility.GetPollAndStoreAzureFunction();
-             var upload = new PollAndStoreData(location, azureFunction);
+             var upload = new PollAndStore(location, azureFunction);
              await upload.Run();
             var returned = await DownloadLastTopicDetection();
             Console.WriteLine("Returned: ");
@@ -74,8 +70,8 @@ namespace Rian.Cognitive {
 
         public async Task<TopicDetectionResponse> DownloadLastTopicDetection()
         {
-            var storage = new DownloadFromBlobStorage(Utility.LoadStorageConnectionString());
-            var response = await storage.DownloadFileAs<TopicDetectionResponse>(TopicDetectionBlob, TopicDetectionContainer);
+            var latest = new GetLatestData(Utility.GetLatestDataFunction());
+            var response = await latest.Run();
             return response;
         }
 

@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace Rian.AzureFunctions
 {
-    public class PollAndStoreWrapper
+    public class PollAndStore
     {
         private string _function;
         private HttpClient _client;
-        public PollAndStoreDataWrapper(string location, string function)
+        public PollAndStore(string location, string function)
         {
             _function = function;
             _client = new HttpClient();

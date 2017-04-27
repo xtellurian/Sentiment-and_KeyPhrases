@@ -34,6 +34,7 @@ https://newsapi.org
 - [ ] Implement Azure Topic Detection
 - [ ] Make a nice output data structure
 - [ ] Front End
+- [ ] Understand why serialisation is happening twice (see GetLatestData.cs)
 
 # Sample Output
 
