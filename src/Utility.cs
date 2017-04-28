@@ -39,15 +39,11 @@ namespace Rian.Cognitive {
             if (!string.IsNullOrEmpty(_newsApiKey)){
                 return _newsApiKey;
             }
-            try
-            {
-                string text = System.IO.File.ReadAllText(NewsApiKeyFileName);
-                return text;
-            }
-            catch(Exception ex)
-            {
-                throw new Exception("Failed to read file with name " + NewsApiKeyFileName, ex);
-            }
+
+            string text = System.IO.File.ReadAllText(NewsApiKeyFileName);
+            return text;
+            
+
             
         }
 

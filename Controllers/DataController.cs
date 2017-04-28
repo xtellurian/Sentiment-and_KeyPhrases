@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Rian.Cognitive;
 
 namespace Sentiment_And_KeyPhrases.Controllers
 {
-    public class DataController : Controller, ILogger, IOut
+    public class DataController : Controller
     {
         private List<string> _data;
         private Manager _manager;
@@ -16,17 +19,21 @@ namespace Sentiment_And_KeyPhrases.Controllers
         {
             _data = new List<string>();
 
-            _manager = new Manager(this, this);
-            
-            task = _manager.RunIndependents();
+            _manager = new Manager();
 
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            task.Wait();
+            var data = await _manager.DownloadLastTopicDetection();
             
-            var content = String.Join("\n", _data.ToArray());
-            return Content(content);
+            return Ok(JsonConvert.SerializeObject(data));
+        }
+
+        public async Task<IActionResult> Renew() 
+        {
+            await _manager.RunTopicDetectionAsync();
+            Debug.WriteLine("Renewing Data");
+            return Ok();
         }
 
       
@@ -35,15 +42,5 @@ namespace Sentiment_And_KeyPhrases.Controllers
             return View();
         }
 
-        public void WriteOut(string line)
-        {
-            System.Diagnostics.Debug.WriteLine(line);
-             _data.Add(line);
-        }
-
-        public void Log(string line)
-        {
-            System.Diagnostics.Debug.WriteLine(line);
-        }
     }
 }

@@ -6,11 +6,13 @@ Taking news article summaries from around the world and generating summaries usi
 
 1) git pull https://github.com/xtellurian/Sentiment-and_KeyPhrases
 
-2) Place Api Keys in 'CognitiveServicesTextApi.key' and 'NewsApi.key'
+2) Create 3 Azure Functions (code provided)
 
-3) dotnet restore
+3) Create API Keys and Azure Functions files
 
-4) dotnet run
+4) dotnet restore
+
+5) dotnet run
 
 
 
@@ -31,10 +33,10 @@ https://newsapi.org
 
 # To Do
 
-- [ ] Implement Azure Topic Detection
+- [x] Implement Azure Topic Detection
 - [ ] Make a nice output data structure
 - [ ] Front End
-- [ ] Understand why serialisation is happening twice (see GetLatestData.cs)
+- [ ] Extend response from LastTopicDetection to include articles that are returned
 
 # Sample Output
 

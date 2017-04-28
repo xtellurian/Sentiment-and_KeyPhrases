@@ -11,6 +11,11 @@ namespace Rian.Cognitive {
         private ILogger _logger;
         private IOut _output;
 
+        public Manager()
+        {
+            _logger =  this;
+            _output =  this;
+        }
         public Manager(ILogger logger = null, IOut output = null)
         {
             // set the logger and the output here
@@ -45,7 +50,7 @@ namespace Rian.Cognitive {
 
         private static string TopicDetectionContainer = "outcontainer";
         private static string TopicDetectionBlob = "topic-detection";
-        public async Task RunTopicDetection()
+        public async Task RunTopicDetectionAsync()
         {
              var sourceResponse = await LoadSources();
 
@@ -68,10 +73,14 @@ namespace Rian.Cognitive {
              var azureFunct = Utility.GetPollAndStoreV2AzureFunction();
              var upload = new PollAndStoreV2(location, azureFunct, sourceResponse);
              await upload.Run();
-            var returned = await DownloadLastTopicDetection();
-            Console.WriteLine("Returned: ");
-            PrintInfo(returned, 10);
+
         }
+
+        public void RunTopicDetectionSynchronous()
+        {
+            this.RunTopicDetectionAsync().Wait();
+        }
+        
 
         public async Task<TopicDetectionResponse> DownloadLastTopicDetection()
         {
@@ -80,13 +89,7 @@ namespace Rian.Cognitive {
             return response;
         }
 
-        private void PrintInfo(TopicDetectionResponse response, int count){
-            response.Result.Topics.Sort( (r1, r2) => r2.Score.CompareTo(r1.Score));
-            
-            for(int i = 0 ; i < count; i++){
-                _output.WriteOut($"{response.Result.Topics[i].KeyPhrase} has score {response.Result.Topics[i].Score}");
-            }
-        }
+
 
         private async Task AnalyseArticles(SourceResponse sourceResponse)
         {
