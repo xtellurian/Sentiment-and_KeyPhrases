@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Rian;
 
 namespace Sentiment_And_KeyPhrases
 {
@@ -20,6 +21,7 @@ namespace Sentiment_And_KeyPhrases
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+            ConfigurationWrapper.Config = Configuration;
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -29,10 +31,6 @@ namespace Sentiment_And_KeyPhrases
         {
             // Add framework services.
             services.AddMvc();
-            Rian.Cognitive.Utility
-                .SetNewsApiKey(Configuration["NewsApiKey"]);
-            Rian.Cognitive.Utility
-                .SetCognitiveServicesTextApiKey(Configuration["CognitiveServicesTextApiKey"]);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

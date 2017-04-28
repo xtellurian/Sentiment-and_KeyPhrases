@@ -60,7 +60,9 @@ namespace Rian.Cognitive {
                 articles.AddRange(source.Articles);
              }
 
-             var service = new TopicDetectionService(Utility.LoadCognitiveServicesTextApiKey());
+             
+             var key = ConfigurationWrapper.Config["CognitiveServicesTextApiKey"];
+             var service = new TopicDetectionService(key);
              var request = TopicDetectionRequest.CreateRequest(articles);
              var location = await service.Post(request);
              _logger.Log(location);
@@ -70,8 +72,8 @@ namespace Rian.Cognitive {
              // await upload.Run();
 
              // v2
-             var azureFunct = Utility.GetPollAndStoreV2AzureFunction();
-             var upload = new PollAndStoreV2(location, azureFunct, sourceResponse);
+             var functionLocation = ConfigurationWrapper.Config["PollAndStoreV2FunctionUri"];
+             var upload = new PollAndStoreV2(location, functionLocation, sourceResponse);
              await upload.Run();
 
         }
@@ -84,7 +86,8 @@ namespace Rian.Cognitive {
 
         public async Task<TopicDetectionResponse> DownloadLastTopicDetection()
         {
-            var latest = new GetLatestData(Utility.GetLatestDataFunction());
+            var functionLocation = ConfigurationWrapper.Config["LatestDataUri"];
+            var latest = new GetLatestData(functionLocation);
             var response = await latest.Run();
             return response;
         }
@@ -93,9 +96,9 @@ namespace Rian.Cognitive {
 
         private async Task AnalyseArticles(SourceResponse sourceResponse)
         {
-            var key = Utility.LoadCognitiveServicesTextApiKey();
+            var key = ConfigurationWrapper.Config["CognitiveServicesTextApiKey"];
             ICognitiveServicesTextAnalysis textAnalysis =
-            new CognitiveServicesTextAnalysis(key);
+                new CognitiveServicesTextAnalysis(key);
 
             var analyser = new ArticleAnalyser(textAnalysis, _logger, _output);
 
@@ -120,7 +123,8 @@ namespace Rian.Cognitive {
 
         private async Task<SourceResponse> LoadSources() 
         {
-            Source.SetApiKey(Utility.LoadNewsApiKey());
+            var key = ConfigurationWrapper.Config["NewsApiKey"];
+            Source.SetApiKey(key);
 
             var sourceResponse = await Source.GetSourcesAsync(_logger, Language.en);
             
