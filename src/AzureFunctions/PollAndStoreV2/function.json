@@ -4,17 +4,18 @@
       "authLevel": "function",
       "name": "req",
       "type": "httpTrigger",
-      "direction": "in",
-      "route": "PollAndStore/dataLocation/",
-      "methods": [
-        "get"
-      ]
+      "direction": "in"
     },
     {
-      "type": "queue",
-      "name": "outputQueue",
-      "queueName": "location-queue",
+      "type": "blob",
+      "name": "output",
+      "path": "processingcontainer/{rand-guid}",
       "connection": "newstopic852_STORAGE",
+      "direction": "out"
+    },
+    {
+      "type": "http",
+      "name": "$return",
       "direction": "out"
     }
   ],

@@ -1,10 +1,10 @@
 {
   "bindings": [
     {
-      "name": "myQueueItem",
-      "type": "queueTrigger",
+      "name": "myBlob",
+      "type": "blobTrigger",
       "direction": "in",
-      "queueName": "location-queue",
+      "path": "processingcontainer/{name}",
       "connection": "newstopic852_STORAGE"
     },
     {

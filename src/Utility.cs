@@ -66,6 +66,20 @@ namespace Rian.Cognitive {
             }
         }
 
+        private static string PollAndStoreV2FunctionFileName = "PollAndStoreV2Function.key";
+        public static string GetPollAndStoreV2AzureFunction() 
+        {
+             try
+            {
+                string text = System.IO.File.ReadAllText(PollAndStoreV2FunctionFileName);
+                return text;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Failed to read file with name " + PollAndStoreV2FunctionFileName, ex);
+            }
+        }
+
         private static string PollAndStoreFunctionFileName = "PollAndStoreFunction.key";
         public static string GetPollAndStoreAzureFunction() 
         {

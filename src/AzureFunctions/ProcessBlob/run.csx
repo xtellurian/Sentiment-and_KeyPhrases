@@ -4,19 +4,29 @@ using System;
 using System.Net;
 using System.Configuration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
-public async static Task<string> Run(string myQueueItem, TraceWriter log)
+public static async Task<string> Run(string myBlob, string name, TraceWriter log)
 {
-    log.Info($"C# Queue trigger function processed: {myQueueItem}");
+    var jObj = JObject.Parse(myBlob);
+    var dataLocation = (string) jObj.SelectToken("['dataLocation']");
+
+    log.Info($"C# Queue trigger function processed: {dataLocation}");
 
     var key = ConfigurationManager.AppSettings["cognitive_api_key"];
 
     var httpClient = new HttpClient();
     httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", key);
 
-    var content = await GetContent(httpClient, myQueueItem, log);
+    var content = await GetContent(httpClient, dataLocation, log);
+    log.Info($"Content string was {content.Length} long");
+    var contentObj = JObject.Parse(content);
+    //merge data
+    var finalContent = MergeResponses(jObj, contentObj);
 
-    return content;
+    log.Info($"C# Blob trigger function Processed blob\n Name:{name} \n Size: {myBlob.Length} Bytes");
+
+    return finalContent;
 }
 
 private async static Task<string> GetContent(HttpClient httpClient, string location, TraceWriter log)
@@ -36,6 +46,17 @@ private async static Task<string> GetContent(HttpClient httpClient, string locat
     }
     
     return content;
+}
+
+private static string MergeResponses(JObject o1, JObject o2)
+{
+    var mergeSettings = new JsonMergeSettings
+    {
+        MergeArrayHandling = MergeArrayHandling.Union
+    };
+
+    o1.Merge(o2, mergeSettings);
+    return JsonConvert.SerializeObject(o1);
 }
 
 public class Response 

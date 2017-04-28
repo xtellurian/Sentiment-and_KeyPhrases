@@ -59,9 +59,14 @@ namespace Rian.Cognitive {
              var request = TopicDetectionRequest.CreateRequest(articles);
              var location = await service.Post(request);
              _logger.Log(location);
+             // v1
+            //  var azureFunction = Utility.GetPollAndStoreAzureFunction();
+             // var upload = new PollAndStore(location, azureFunction);
+             // await upload.Run();
 
-             var azureFunction = Utility.GetPollAndStoreAzureFunction();
-             var upload = new PollAndStore(location, azureFunction);
+             // v2
+             var azureFunct = Utility.GetPollAndStoreV2AzureFunction();
+             var upload = new PollAndStoreV2(location, azureFunct, sourceResponse);
              await upload.Run();
             var returned = await DownloadLastTopicDetection();
             Console.WriteLine("Returned: ");
