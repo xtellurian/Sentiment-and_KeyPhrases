@@ -20,6 +20,7 @@ namespace Rian.Cognitive {
         public string country { get; set; }
         public UrlsToLogos urlsToLogos { get; set; }
         public List<string> sortBysAvailable { get; set; }
+        public List<Article> Articles {get; protected set;}
     }
 
     public class SourceResponse

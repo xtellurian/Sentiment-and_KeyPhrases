@@ -48,8 +48,7 @@ namespace Rian.Cognitive {
             await AnalyseArticles(sourceResponse);
         }
 
-        private static string TopicDetectionContainer = "outcontainer";
-        private static string TopicDetectionBlob = "topic-detection";
+
         public async Task RunTopicDetectionAsync()
         {
              var sourceResponse = await LoadSources();
@@ -84,7 +83,7 @@ namespace Rian.Cognitive {
         }
         
 
-        public async Task<TopicDetectionResponse> DownloadLastTopicDetection()
+        public async Task<TopicDetectionAggregate> DownloadLastTopicDetection()
         {
             var functionLocation = ConfigurationWrapper.Config["LatestDataUri"];
             var latest = new GetLatestData(functionLocation);

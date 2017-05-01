@@ -10,7 +10,6 @@ namespace Rian.Cognitive {
     {
         private const string serviceEndpoint = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/";
         private HttpClient _httpClient;
-        private ILogger _logger;
         public TopicDetectionService(string apiKey)
         {
             _httpClient = new HttpClient();

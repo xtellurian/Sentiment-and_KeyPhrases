@@ -12,7 +12,7 @@ namespace Rian.Cognitive {
         private const string articlesUrl = "https://newsapi.org/v1/articles";
         private static string _apiKey;
 
-        public List<Article> Articles {get; private set;}
+        // public List<Article> Articles {get; private set;}
 
         public ILogger Logger {get;set;}
         public async Task<int> LoadArticles()

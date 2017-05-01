@@ -1,0 +1,41 @@
+@model Rian.Cognitive.TopicDetectionResponse
+
+@{
+    var orderedTopics = Model.Result.Topics.OrderByDescending(m=>m.Score);
+                               
+}
+
+<h2>Details</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    Score
+                </th>
+                <th>
+                    Key Phrase
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var topic in orderedTopics) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => topic.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => topic.KeyPhrase)
+            </td>
+            <td>
+                <a asp-action="detail" asp-route-id="@topic.Id">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div>
+
+</div>

@@ -8,7 +8,7 @@ namespace Rian.Cognitive
         [JsonProperty("id")]
         public string Id { get; set; }
         [JsonProperty("score")]
-        public string Score { get; set; }
+        public double Score { get; set; }
         [JsonProperty("keyPhrase")]
         public string KeyPhrase { get; set; }
     }

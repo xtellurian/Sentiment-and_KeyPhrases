@@ -17,7 +17,7 @@ namespace Rian.AzureFunctions
             _function = function;
         }
 
-        public async Task<TopicDetectionResponse> Run()
+        public async Task<TopicDetectionAggregate> Run()
         {
             var res = await _client.GetAsync(_function);
             var text = await res.Content.ReadAsStringAsync();
@@ -25,7 +25,7 @@ namespace Rian.AzureFunctions
             try
             {
                 var other1 = JsonConvert.DeserializeObject<string>(text);
-                var other = JsonConvert.DeserializeObject<TopicDetectionResponse>(other1);
+                var other = JsonConvert.DeserializeObject<TopicDetectionAggregate>(other1);
                 // weird - its getting serialised twice somehow...
                 return other;
             }

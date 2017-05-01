@@ -10,11 +10,12 @@ using Rian.Cognitive;
 
 namespace Sentiment_And_KeyPhrases.Controllers
 {
-    public class DataController : Controller
+    public class TopicsController : Controller
     {
         private List<string> _data;
         private Manager _manager;
-        public DataController()
+
+        public TopicsController()
         {
             _data = new List<string>();
 
@@ -25,14 +26,12 @@ namespace Sentiment_And_KeyPhrases.Controllers
         {
             var data = await _manager.DownloadLastTopicDetection();
             
-            return Ok(JsonConvert.SerializeObject(data));
+            return View(data);
         }
 
-        public async Task<IActionResult> Renew() 
+        public async Task<IActionResult> Detail () 
         {
-            await _manager.RunTopicDetectionAsync();
-            Debug.WriteLine("Renewing Data");
-            return Ok();
+            return Ok("hello, im detail");
         }
 
       
