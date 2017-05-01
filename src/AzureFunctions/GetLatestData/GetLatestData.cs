@@ -34,7 +34,6 @@ namespace Rian.AzureFunctions
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                Debug.WriteLine(text);
             }
             return null;
             

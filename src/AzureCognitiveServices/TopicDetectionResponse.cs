@@ -27,7 +27,7 @@ namespace Rian.Cognitive
     public class TopicDetectionResponse
     {
         [JsonProperty("createdDateTime")]
-        public DateTime CreatedDateTime {get;set;}
+        public DateTime? CreatedDateTime {get;set;}
         [JsonProperty("dataLocation")]
         public string DataLocation {get;set;}
         [JsonProperty("status")]

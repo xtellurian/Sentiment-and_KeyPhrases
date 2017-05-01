@@ -47,7 +47,7 @@ namespace Rian.Cognitive
     public class MetaData 
     {
         public string DataLocation {get;set;}
-        public DateTime DateCreated {get;set;}
+        public DateTime? DateCreated {get;set;}
     }
 }
 
