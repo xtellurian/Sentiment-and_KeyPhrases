@@ -62,13 +62,13 @@ namespace Rian.Cognitive {
                 if(supportedLanguages.Contains(a.Language)){
                     switch(field){
                         case TextField.Title:
-                        if(!string.IsNullOrEmpty(a.title)){
-                            request.Documents.Add(new TextDocument(a.Id.ToString(), a.title, a.Language));
+                        if(!string.IsNullOrEmpty(a.Title)){
+                            request.Documents.Add(new TextDocument(a.Id.ToString(), a.Title, a.Language));
                         }
                         break;
                         case TextField.Description:
-                        if(!string.IsNullOrEmpty(a.description)){
-                            request.Documents.Add(new TextDocument(a.Id.ToString(), a.description, a.Language));
+                        if(!string.IsNullOrEmpty(a.Description)){
+                            request.Documents.Add(new TextDocument(a.Id.ToString(), a.Description, a.Language));
                         }
                         break;
                     }
@@ -109,14 +109,14 @@ namespace Rian.Cognitive {
                 if(supportedLanguages.Contains(a.Language)){
                     switch(field){
                         case TextField.Title: 
-                        if(!string.IsNullOrEmpty(a.title)){
-                            request.Documents.Add(new TextDocument(a.Id.ToString(), a.title.ToString(), a.Language));
+                        if(!string.IsNullOrEmpty(a.Title)){
+                            request.Documents.Add(new TextDocument(a.Id.ToString(), a.Title.ToString(), a.Language));
                         }          
                         break;
                         case TextField.Description:
-                        if(!string.IsNullOrEmpty(a.description))
+                        if(!string.IsNullOrEmpty(a.Description))
                         {
-                            request.Documents.Add(new TextDocument(a.Id.ToString(), a.description.ToString(), a.Language));
+                            request.Documents.Add(new TextDocument(a.Id.ToString(), a.Description.ToString(), a.Language));
                         }
                         
                         break;

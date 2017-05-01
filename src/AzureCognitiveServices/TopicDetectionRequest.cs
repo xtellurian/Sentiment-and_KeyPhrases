@@ -18,7 +18,7 @@ namespace Rian.Cognitive {
         foreach(var article in articles){
             request.Documents.Add(new Document(){
                 Id = article.Id.ToString(),
-                Text = article.title + "\n" + article.description
+                Text = article.Title + "\n" + article.Description
             });
         }
         return request;

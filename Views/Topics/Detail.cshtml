@@ -1,41 +1,42 @@
-@model Rian.Cognitive.TopicDetectionResponse
+@model IEnumerable<Rian.Cognitive.Article>
 
-@{
-    var orderedTopics = Model.Result.Topics.OrderByDescending(m=>m.Score);
-                               
-}
-
-<h2>Details</h2>
 
 <table class="table">
     <thead>
         <tr>
                 <th>
-                    Score
+                    @Html.DisplayNameFor(model => model.Title)
                 </th>
                 <th>
-                    Key Phrase
+                    @Html.DisplayNameFor(model => model.Author)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PublishedAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Url)
                 </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var topic in orderedTopics) {
+@foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => topic.Score)
+                @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => topic.KeyPhrase)
+                @Html.DisplayFor(modelItem => item.Author)
             </td>
             <td>
-                <a asp-action="detail" asp-route-id="@topic.Id">Details</a>
+                @Html.DisplayFor(modelItem => item.PublishedAt)
+            </td>
+            <td>
+                <img src= "@Url.Content(item.UrlToImage)" alt="Image" />
+            </td>
+            <td>
             </td>
         </tr>
 }
     </tbody>
 </table>
-
-<div>
-
-</div>

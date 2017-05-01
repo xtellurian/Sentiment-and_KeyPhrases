@@ -44,6 +44,7 @@ namespace Sentiment_And_KeyPhrases.Controllers
         public async Task<IActionResult> Detail (string id) 
         {
             if(IsRefreshData()) await RefreshData();
+
             // get document ids
             var docIds = new List<string>();
             foreach(var ass in _data.Result.TopicAssignments){
@@ -51,6 +52,7 @@ namespace Sentiment_And_KeyPhrases.Controllers
                     docIds.Add(ass.DocumentId);
                 }
             }
+
             // get documents and display
             var articles = new List<Article>();
             foreach(var source in _data.Sources){
@@ -62,7 +64,11 @@ namespace Sentiment_And_KeyPhrases.Controllers
                     }
                 }
             }
-            return Ok($"hello, im detail of {id}, and I found {articles.Count} articles");
+            // get keyphrase
+            var keyPhrase = _data.Result.Topics.FirstOrDefault(d => d.Id == id);
+
+            ViewData["KeyPhrase"] = keyPhrase;
+            return View(articles);
         }
 
       
