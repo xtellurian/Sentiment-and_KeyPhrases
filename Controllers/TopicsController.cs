@@ -13,8 +13,8 @@ namespace Sentiment_And_KeyPhrases.Controllers
     public class TopicsController : Controller
     {
         private Manager _manager;
-        private ArticleDataAggregate _data;
-        private DateTime _dataBirth;
+        private static ArticleDataAggregate _data;
+        private static DateTime _dataBirth;
         private const int DataMaxAgeMinutes = 5;
         public TopicsController()
         {
