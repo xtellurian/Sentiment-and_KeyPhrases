@@ -16,6 +16,7 @@ namespace Rian.Cognitive {
             _httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apiKey);
         }
         
+        // this is usually handled by an azure function
          public async Task<string> Post(TopicDetectionRequest request)
          {
             var content = new StringContent(JsonConvert.SerializeObject(request), System.Text.Encoding.UTF8, "application/json");
