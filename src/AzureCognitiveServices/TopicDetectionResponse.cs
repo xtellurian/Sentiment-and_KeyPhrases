@@ -1,17 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Rian.Cognitive 
 {
-    public class Topic
-    {
-        [JsonProperty("id")]
-        public string Id { get; set; }
-        [JsonProperty("score")]
-        public double Score { get; set; }
-        [JsonProperty("keyPhrase")]
-        public string KeyPhrase { get; set; }
-    }
 
     public class TopicAssignment
     {
@@ -20,7 +12,7 @@ namespace Rian.Cognitive
         [JsonProperty("documentId")]
         public string DocumentId { get; set; }
         [JsonProperty("distance")]
-        public string Distance { get; set; }
+        public float Distance { get; set; }
     }
 
     public class OperationResult
@@ -34,6 +26,10 @@ namespace Rian.Cognitive
 
     public class TopicDetectionResponse
     {
+        [JsonProperty("createdDateTime")]
+        public DateTime CreatedDateTime {get;set;}
+        [JsonProperty("dataLocation")]
+        public string DataLocation {get;set;}
         [JsonProperty("status")]
         public string Status { get; set; }
 

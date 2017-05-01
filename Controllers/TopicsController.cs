@@ -13,7 +13,7 @@ namespace Sentiment_And_KeyPhrases.Controllers
     public class TopicsController : Controller
     {
         private Manager _manager;
-        private TopicDetectionAggregate _data;
+        private ArticleDataAggregate _data;
         private DateTime _dataBirth;
         private const int DataMaxAgeMinutes = 5;
         public TopicsController()
@@ -41,31 +41,16 @@ namespace Sentiment_And_KeyPhrases.Controllers
             _data = await _manager.DownloadLastTopicDetection();
         }
 
-        public async Task<IActionResult> Detail (string id) 
+        public async Task<IActionResult> Detail (string id) // id = topicId
         {
             if(IsRefreshData()) await RefreshData();
 
             // get document ids
-            var docIds = new List<string>();
-            foreach(var ass in _data.Result.TopicAssignments){
-                if(string.Equals(ass.TopicId, id )){
-                    docIds.Add(ass.DocumentId);
-                }
-            }
-
+            var articles = _data.Articles.Where(a=>a.TopicAssignments.Any(b => b.TopicId == id));
             // get documents and display
-            var articles = new List<Article>();
-            foreach(var source in _data.Sources){
-                foreach(var article in source.Articles){
-                    Debug.WriteLine(article.Id.ToString());
-                    if (docIds.Any(d => string.Equals(d, article.Id.ToString())))
-                    {
-                        articles.Add(article);
-                    }
-                }
-            }
+            
             // get keyphrase
-            var keyPhrase = _data.Result.Topics.FirstOrDefault(d => d.Id == id);
+            var keyPhrase = _data.Topics.FirstOrDefault(d => d.Id == id);
 
             ViewData["KeyPhrase"] = keyPhrase;
             return View(articles);

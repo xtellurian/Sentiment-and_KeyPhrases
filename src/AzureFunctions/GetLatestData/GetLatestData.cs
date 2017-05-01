@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -36,6 +38,34 @@ namespace Rian.AzureFunctions
             }
             return null;
             
+        }
+
+        public ArticleDataAggregate Convert(TopicDetectionAggregate old)
+        {
+            var aggregate = new ArticleDataAggregate();
+            var meta = new MetaData();
+            meta.DataLocation = old.DataLocation;
+            meta.DateCreated = old.CreatedDateTime;
+            aggregate.Meta = meta;
+            aggregate.AddSourcesThreadsafe(old.Sources);
+            foreach(var s in old.Sources){
+                aggregate.AddArticlesThreadsafe(s.Articles);
+            }
+            aggregate.AddTopicsThreadsafe(old.Result.Topics);
+
+            foreach(var t in old.Result.TopicAssignments)
+            {
+                var a = aggregate.Articles.FirstOrDefault(x => x.Id?.ToString() == t.DocumentId);
+                if(a.TopicAssignments == null) a.TopicAssignments = new List<TopicAssignment>();
+                a.TopicAssignments.Add(t);
+                
+            }
+            foreach(var a in aggregate.Articles){
+                if(a.TopicAssignments==null) a.TopicAssignments = new List<TopicAssignment>();
+            }
+
+            return aggregate;
+
         }
     }
 }

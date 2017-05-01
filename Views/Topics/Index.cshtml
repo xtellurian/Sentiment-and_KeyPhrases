@@ -1,7 +1,7 @@
-@model Rian.Cognitive.TopicDetectionResponse
+@model Rian.Cognitive.ArticleDataAggregate
 
 @{
-    var orderedTopics = Model.Result.Topics.OrderByDescending(m=>m.Score);
+    var orderedTopics = Model.Topics.OrderByDescending(m=>m.Score);
                                
 }
 

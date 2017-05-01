@@ -33,12 +33,13 @@ https://newsapi.org
 
 # To Do
 
-- [x] Implement Azure Topic Detection
-- [ ] Make a nice output data structure
+- [ ] Refactor Data Model
+- [ ] Cache machanism in ASP.NET for improved performance
 - [ ] Front End
-- [ ] Extend response from LastTopicDetection to include articles that are returned
+- [x] Extend response from LastTopicDetection to include articles that are returned
+- [x] Implement Azure Topic Detection
 
-# Sample Output
+# Sample Output (Original)
 
 COUNT x PHRASE -- SENTIMENT
 

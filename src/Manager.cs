@@ -83,12 +83,13 @@ namespace Rian.Cognitive {
         }
         
 
-        public async Task<TopicDetectionAggregate> DownloadLastTopicDetection()
+        public async Task<ArticleDataAggregate> DownloadLastTopicDetection()
         {
             var functionLocation = ConfigurationWrapper.Config["LatestDataUri"];
             var latest = new GetLatestData(functionLocation);
             var response = await latest.Run();
-            return response;
+            var convertedResponse = latest.Convert(response);
+            return convertedResponse;;
         }
 
 

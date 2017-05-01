@@ -25,6 +25,8 @@ namespace Rian.Cognitive {
         public double TitleSentiment {get; set;}
         public double DescriptionSentiment {get;set;}
         public string Language {get;set;}
+        public List<TopicAssignment> TopicAssignments {get;set;}
+
     }
 
     public class ArticleResponse
