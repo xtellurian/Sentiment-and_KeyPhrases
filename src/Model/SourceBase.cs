@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Rian.Cognitive {
         
@@ -20,6 +21,8 @@ namespace Rian.Cognitive {
         public string country { get; set; }
         public UrlsToLogos urlsToLogos { get; set; }
         public List<string> sortBysAvailable { get; set; }
+        
+        [JsonProperty("articles")]
         public List<Article> Articles {get; protected set;}
     }
 

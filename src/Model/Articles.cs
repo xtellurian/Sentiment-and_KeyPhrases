@@ -5,14 +5,7 @@ namespace Rian.Cognitive {
         
     public class Article
     {
-        private Guid _id;
-        public Guid Id {
-            get
-            {
-                if(_id==null || _id.CompareTo(Guid.Empty)==0) _id = Guid.NewGuid();
-                return _id;
-            }
-        }
+        public Guid? Id { get;set;}
         public string author { get; set; }
         public string title { get; set; }
         public string description { get; set; }

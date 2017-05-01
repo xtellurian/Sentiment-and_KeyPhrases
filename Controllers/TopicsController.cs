@@ -12,26 +12,57 @@ namespace Sentiment_And_KeyPhrases.Controllers
 {
     public class TopicsController : Controller
     {
-        private List<string> _data;
         private Manager _manager;
-
+        private TopicDetectionAggregate _data;
+        private DateTime _dataBirth;
+        private const int DataMaxAgeMinutes = 5;
         public TopicsController()
         {
-            _data = new List<string>();
-
             _manager = new Manager();
-
+            
         }
         public async Task<IActionResult> Index()
         {
-            var data = await _manager.DownloadLastTopicDetection();
+            if(IsRefreshData()){
+                await RefreshData();
+            }
             
-            return View(data);
+            return View(_data);
+        }
+        private bool IsRefreshData()
+        {
+            return _data == null || _dataBirth.AddMinutes(DataMaxAgeMinutes) < DateTime.Now;
         }
 
-        public async Task<IActionResult> Detail () 
+        private async Task RefreshData ()
         {
-            return Ok("hello, im detail");
+            Debug.WriteLine("Refreshing Data");
+            _dataBirth = DateTime.Now;
+            _data = await _manager.DownloadLastTopicDetection();
+        }
+
+        public async Task<IActionResult> Detail (string id) 
+        {
+            if(IsRefreshData()) await RefreshData();
+            // get document ids
+            var docIds = new List<string>();
+            foreach(var ass in _data.Result.TopicAssignments){
+                if(string.Equals(ass.TopicId, id )){
+                    docIds.Add(ass.DocumentId);
+                }
+            }
+            // get documents and display
+            var articles = new List<Article>();
+            foreach(var source in _data.Sources){
+                foreach(var article in source.Articles){
+                    Debug.WriteLine(article.Id.ToString());
+                    if (docIds.Any(d => string.Equals(d, article.Id.ToString())))
+                    {
+                        articles.Add(article);
+                    }
+                }
+            }
+            return Ok($"hello, im detail of {id}, and I found {articles.Count} articles");
         }
 
       

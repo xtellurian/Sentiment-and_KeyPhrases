@@ -35,6 +35,7 @@ namespace Rian.Cognitive {
                 Articles = result.articles;
                 foreach(var a in Articles){
                     a.Language = language;
+                    a.Id = Guid.NewGuid(); // articles don't come with unique Ids
                 }
                 Logger?.Log($"Loaded {Articles.Count} articles from {name}");
                 return Articles.Count;
