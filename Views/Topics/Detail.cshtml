@@ -14,7 +14,7 @@
                     @Html.DisplayNameFor(model => model.PublishedAt)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Url)
+                    @Html.DisplayNameFor(model => model.Sentiment)
                 </th>
             <th></th>
         </tr>
@@ -32,7 +32,7 @@
                 @Html.DisplayFor(modelItem => item.PublishedAt)
             </td>
             <td>
-                <img src= "@Url.Content(item.UrlToImage)" alt="Image" height="50" width="50"/>
+                @Html(DisplayFor(modelItem -> item.Sentiment))
             </td>
             <td>
             </td>

@@ -30,24 +30,6 @@ namespace Rian.Cognitive {
             Console.WriteLine(line);
         }
 
-        public async Task RunIndependents ()
-        {
-            if (_logger == null)
-            {
-                throw new NullReferenceException("Logger not set");
-            }
-            if (_output == null)
-            {
-                throw new NullReferenceException("output is null");
-            }
-
-            var sourceResponse = await LoadSources();
-
-            await LoadArticles(sourceResponse);
-
-            await AnalyseArticles(sourceResponse);
-        }
-
 
         public async Task RunTopicDetectionAsync()
         {
@@ -65,12 +47,7 @@ namespace Rian.Cognitive {
              var request = TopicDetectionRequest.CreateRequest(articles);
              var location = await service.Post(request);
              _logger.Log(location);
-             // v1
-            //  var azureFunction = Utility.GetPollAndStoreAzureFunction();
-             // var upload = new PollAndStore(location, azureFunction);
-             // await upload.Run();
 
-             // v2
              var functionLocation = ConfigurationWrapper.Config["PollAndStoreV2FunctionUri"];
              var upload = new PollAndStoreV2(location, functionLocation, sourceResponse);
              await upload.Run();
@@ -94,15 +71,15 @@ namespace Rian.Cognitive {
 
 
 
-        private async Task AnalyseArticles(SourceResponse sourceResponse)
+        private async Task AnalyseArticles(List<Article> articles)
         {
             var key = ConfigurationWrapper.Config["CognitiveServicesTextApiKey"];
             ICognitiveServicesTextAnalysis textAnalysis =
                 new CognitiveServicesTextAnalysis(key);
 
             var analyser = new ArticleAnalyser(textAnalysis, _logger, _output);
+            await analyser.AnalyseArticles(articles);
 
-            await analyser.AnalyseAll(sourceResponse.sources);
         }
 
         private async Task LoadArticles(SourceResponse sourceResponse)

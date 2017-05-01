@@ -20,10 +20,8 @@ namespace Rian.Cognitive {
         public string UrlToImage { get; set; }
         [JsonProperty("publishedAt")]
         public DateTime? PublishedAt { get; set; }
-        public List<string> TitleKeyPhrases {get; set;}
-        public List<string> DescriptionKeyPhrases {get;set;}
-        public double TitleSentiment {get; set;}
-        public double DescriptionSentiment {get;set;}
+        public List<string> KeyPhrases {get;set;}
+        public double Sentiment {get;set;}
         public string Language {get;set;}
         public List<TopicAssignment> TopicAssignments {get;set;}
 

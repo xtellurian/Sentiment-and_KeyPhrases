@@ -6,10 +6,9 @@ namespace Rian.Cognitive {
 
     public interface ICognitiveServicesTextAnalysis
     {
-        Task<IEnumerable<Article>> SetSentiments(IEnumerable<Article> articles, TextField field);
-        Task<IEnumerable<Article>> SetKeyPhrases (IEnumerable<Article> articles, TextField field);
+        Task<IEnumerable<Article>> SetSentiments(IEnumerable<Article> articles);
+        Task<IEnumerable<Article>> SetKeyPhrases (IEnumerable<Article> articles);
         
     }   
 
-    public enum TextField {Title, Description}
 }

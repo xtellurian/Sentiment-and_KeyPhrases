@@ -54,30 +54,18 @@ namespace Rian.Cognitive {
 
 
         private readonly string[] supportedLanguages = {"en","es","fr","pt"};
-        public async Task<IEnumerable<Article>> SetSentiments(IEnumerable<Article> articles, TextField field)
+        public async Task<IEnumerable<Article>> SetSentiments(IEnumerable<Article> articles)
         {
 
             var request = new TextRequest();
             foreach(var a in articles){
                 if(supportedLanguages.Contains(a.Language)){
-                    switch(field){
-                        case TextField.Title:
-                        if(!string.IsNullOrEmpty(a.Title)){
-                            request.Documents.Add(new TextDocument(a.Id.ToString(), a.Title, a.Language));
-                        }
-                        break;
-                        case TextField.Description:
-                        if(!string.IsNullOrEmpty(a.Description)){
+                    if(!string.IsNullOrEmpty(a.Description)){
                             request.Documents.Add(new TextDocument(a.Id.ToString(), a.Description, a.Language));
-                        }
-                        break;
                     }
                 }
-                else{
-                    // Manager.WriteLine($"{a.Language} not supported");
-                    a.TitleSentiment = -1;
-                }
             }
+
             var content = new StringContent(JsonConvert.SerializeObject(request), System.Text.Encoding.UTF8, "application/json");
             var result = await _httpClient.PostAsync($"{serviceEndpoint}sentiment", content).ConfigureAwait(false);
 
@@ -87,44 +75,25 @@ namespace Rian.Cognitive {
             foreach(var f in ff){
                 var id = f["id"];
                 var sentiment = f["score"];
-                switch(field){
-                        case TextField.Title: 
-                        articles.FirstOrDefault(a=>a.Id.ToString() == id.ToString()).TitleSentiment
+
+                articles.FirstOrDefault(a=>a.Id.ToString() == id.ToString()).Sentiment
                             = sentiment.Value<double>();
-                        break;
-                        case TextField.Description:
-                        articles.FirstOrDefault(a=>a.Id.ToString() == id.ToString()).DescriptionSentiment
-                            = sentiment.Value<double>();
-                        break;
-                    }
-                
+
             }
             return articles;
         }
 
-        public async Task<IEnumerable<Article>> SetKeyPhrases (IEnumerable<Article> articles, TextField field)
+        public async Task<IEnumerable<Article>> SetKeyPhrases (IEnumerable<Article> articles)
         {
             var request = new TextRequest();
             foreach(var a in articles){
                 if(supportedLanguages.Contains(a.Language)){
-                    switch(field){
-                        case TextField.Title: 
-                        if(!string.IsNullOrEmpty(a.Title)){
-                            request.Documents.Add(new TextDocument(a.Id.ToString(), a.Title.ToString(), a.Language));
-                        }          
-                        break;
-                        case TextField.Description:
-                        if(!string.IsNullOrEmpty(a.Description))
-                        {
-                            request.Documents.Add(new TextDocument(a.Id.ToString(), a.Description.ToString(), a.Language));
-                        }
-                        
-                        break;
-                    }
+                    request.Documents.Add(
+                        new TextDocument(a.Id.ToString(), a.Description.ToString(), a.Language));
                 }
                 else{
                 //   Manager.WriteLine($"{a.Language} not supported");
-                    a.TitleKeyPhrases = null;
+                    a.KeyPhrases = new List<string>();
                 }
             }
             var content = new StringContent(JsonConvert.SerializeObject(request), System.Text.Encoding.UTF8, "application/json");
@@ -135,14 +104,8 @@ namespace Rian.Cognitive {
             foreach(var doc in response["documents"].Children()){
                 var id = doc["id"];
                 var phrases = doc.Value<JArray>("keyPhrases").ToObject<List<string>>();
-                switch(field){
-                    case TextField.Title:
-                    articles.FirstOrDefault(a=>a.Id.ToString() == id.ToString()).TitleKeyPhrases = phrases;
-                    break;
-                    case TextField.Description:
-                    articles.FirstOrDefault(a=>a.Id.ToString() == id.ToString()).DescriptionKeyPhrases = phrases;
-                    break;
-                }
+
+                articles.FirstOrDefault(a=>a.Id.ToString() == id.ToString()).KeyPhrases = phrases;
                 
             }
 
