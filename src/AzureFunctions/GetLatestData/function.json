@@ -18,7 +18,7 @@
     {
       "type": "blob",
       "name": "inputBlob",
-      "path": "outcontainer/topic-detection",
+      "path": "outcontainer2/topic-detection",
       "connection": "newstopic852_STORAGE",
       "direction": "in"
     }
