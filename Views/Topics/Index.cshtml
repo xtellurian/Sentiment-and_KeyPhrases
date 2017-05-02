@@ -2,11 +2,12 @@
 
 @{
     var orderedTopics = Model.Topics.OrderByDescending(m=>m.Score);
-    ViewData["Title"]="Topics";                         
+    ViewData["Title"]="Topics";
+    int numberOfMinutes = (int) (DateTime.UtcNow - Model.Meta.DateCreated).Value.TotalMinutes;                          
 }
 
 <h2>Current Topics</h2>
-<h4>Created at @Model.Meta.DateCreated?.ToLocalTime().ToString("H:mm on MMMM dd")</h4>
+<h4>Created @numberOfMinutes minutes ago</h4>
 <table class="table">
     <thead>
         <tr>

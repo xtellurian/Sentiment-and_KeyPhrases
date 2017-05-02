@@ -1,7 +1,13 @@
 @model IEnumerable<Rian.Cognitive.Article>
 
-<h3>@ViewData["Title"].</h3>
-
+<div>
+    <div align="left">
+        <h3>@ViewData["Title"]</h3>
+    </div>
+    <div align="right">
+        <h4><a href="javascript:void(0);" onclick="history.go(-1);">Back</a></h4>
+    </div>
+</div>
 <table class="table">
     <thead>
         <tr>
