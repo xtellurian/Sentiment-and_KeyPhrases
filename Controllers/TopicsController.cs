@@ -50,9 +50,9 @@ namespace Sentiment_And_KeyPhrases.Controllers
             // get documents and display
             
             // get keyphrase
-            var keyPhrase = _data.Topics.FirstOrDefault(d => d.Id == id);
+            var topic = _data.Topics.FirstOrDefault(d => d.Id == id);
 
-            ViewData["KeyPhrase"] = keyPhrase;
+            ViewData["Title"] = topic.KeyPhrase;
             return View(articles);
         }
 
