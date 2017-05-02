@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
 namespace Rian.Cognitive {
@@ -21,6 +22,7 @@ namespace Rian.Cognitive {
         [JsonProperty("publishedAt")]
         public DateTime? PublishedAt { get; set; }
         public List<string> KeyPhrases {get;set;}
+        [DisplayFormat(DataFormatString = "{0:P0}")]
         public double Sentiment {get;set;}
         public string Language {get;set;}
         public List<TopicAssignment> TopicAssignments {get;set;}
