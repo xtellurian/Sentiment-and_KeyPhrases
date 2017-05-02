@@ -33,9 +33,10 @@ https://newsapi.org
 
 # To Do
 
-- [ ] Refactor Data Model
-- [ ] Cache machanism in ASP.NET for improved performance
-- [ ] Front End
+- [x] Refactor Data Model
+- [x] Cache machanism in ASP.NET for improved performance
+- [ ] Front End Improvements
+- [ ] Better logging in Azure Functions
 - [x] Extend response from LastTopicDetection to include articles that are returned
 - [x] Implement Azure Topic Detection
 
