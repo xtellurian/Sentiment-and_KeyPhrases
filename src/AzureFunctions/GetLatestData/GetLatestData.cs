@@ -66,5 +66,21 @@ namespace Rian.AzureFunctions
             return aggregate;
 
         }
+
+        public ArticleDataAggregate AverageSentimentsOverTopcs(ArticleDataAggregate data)
+        {
+            foreach(var topic in data.Topics)
+                {
+                    var articles = data.Articles.Where(a => a.TopicAssignments.Any(t=>t.TopicId == topic.Id));
+                    double average = 0;
+                    foreach(var a in articles)
+                    {
+                        average += a.Sentiment;
+                    }
+                    topic.AverageSentiment = average / articles.Count();
+                }
+
+            return data;
+        }
     }
 }

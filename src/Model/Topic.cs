@@ -10,5 +10,6 @@ namespace Rian.Cognitive
         public double Score { get; set; }
         [JsonProperty("keyPhrase")]
         public string KeyPhrase { get; set; }
+        public double AverageSentiment {get;set;}
     }
 }

@@ -1,5 +1,5 @@
 #r "Newtonsoft.Json"
-#load "Documents.cs"
+#load "Documents.csx"
 
 using System;
 using System.Net;

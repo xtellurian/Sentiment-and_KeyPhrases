@@ -66,7 +66,8 @@ namespace Rian.Cognitive {
             var latest = new GetLatestData(functionLocation);
             var response = await latest.Run();
             var convertedResponse = latest.Convert(response);
-            return convertedResponse;;
+            var averagedResponse = latest.AverageSentimentsOverTopcs(convertedResponse);
+            return averagedResponse;;
         }
 
 

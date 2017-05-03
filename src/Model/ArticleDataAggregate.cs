@@ -53,22 +53,3 @@ namespace Rian.Cognitive
 
 
 
-
-// {
-//     meta{
-//         data location,
-//         created time
-
-//     }
-//     articles{
-//         // should have topic assignment and distance in article
-
-//     }
-//     sources{
-
-//     }
-//     topics{
-
-//     }
-// }
-
