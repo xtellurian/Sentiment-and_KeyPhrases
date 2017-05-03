@@ -17,10 +17,16 @@ textarea {
     max-width: 280px;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+.red-sentiment {
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+.yellow-sentiment {
+    background-color:rgba(255,255,0,0.2);
+}
+
+.green-sentiment {
+    background-color:rgba(0, 255, 0, 0.3);;
 }
 
 /* Make .svg files in the carousel display properly in older browsers */

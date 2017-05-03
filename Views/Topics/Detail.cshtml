@@ -1,5 +1,14 @@
 @model IEnumerable<Rian.Cognitive.Article>
 
+@section Scripts {
+    <script type="text/javascript">
+
+
+    // Write your Javascript code.
+ $(document).ready(colorRows);
+    </script>
+}
+
 <div>
     <div align="left">
         <h3>@ViewData["Title"]</h3>
@@ -10,7 +19,7 @@
 </div>
 <table class="table">
     <thead>
-        <tr>
+        <tr >
                 <th>
                     @Html.DisplayNameFor(model => model.Title)
                 </th>
@@ -28,9 +37,9 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr data-color="@item.Sentiment">
             <td>
-                <a href="@item.Url">@Html.DisplayFor(modelItem => item.Title)</a>
+                <a href="@item.Url" target="=_blank">@Html.DisplayFor(modelItem => item.Title)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Author)
