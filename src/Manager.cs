@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage;
 using Rian.AzureFunctions;
 
 namespace Rian.Cognitive {
