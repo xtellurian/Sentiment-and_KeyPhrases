@@ -6,6 +6,13 @@
     int numberOfMinutes = (int) (DateTime.UtcNow - Model.Meta.DateCreated).Value.TotalMinutes;                          
 }
 
+@section Scripts {
+    <script type="text/javascript">
+    // Write your Javascript code.
+ $(document).ready(colorRows);
+    </script>
+}
+
 <h2>Current Topics</h2>
 <h4>Created @numberOfMinutes minutes ago</h4>
 <table class="table">
@@ -17,17 +24,23 @@
                 <th>
                     Key Phrase
                 </th>
+                <th>
+                    Average Sentiment
+                </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var topic in orderedTopics) {
-        <tr>
+        <tr data-color="@topic.AverageSentiment">
             <td>
                 @Html.DisplayFor(modelItem => topic.Score)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => topic.KeyPhrase)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => topic.AverageSentiment)
             </td>
             <td>
                 <a asp-action="detail" asp-route-id="@topic.Id">Details</a>
