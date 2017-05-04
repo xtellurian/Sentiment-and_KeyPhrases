@@ -10,7 +10,7 @@
     {
       "type": "blob",
       "name": "$return",
-      "path": "outcontainer/topic-detection",
+      "path": "outcontainer/{name}",
       "connection": "newstopic852_STORAGE",
       "direction": "out"
     }

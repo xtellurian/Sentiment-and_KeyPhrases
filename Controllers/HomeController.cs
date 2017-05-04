@@ -14,7 +14,7 @@ namespace Sentiment_And_KeyPhrases.Controllers
         public HomeController()
         {
              _manager = new Manager();
-             _startDownloading = _manager.DownloadLastTopicDetection();
+             _startDownloading = _manager.GetLatest();
              
         }
         public IActionResult Index()

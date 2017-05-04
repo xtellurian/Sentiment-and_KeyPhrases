@@ -4,13 +4,13 @@
       "name": "myBlob",
       "type": "blobTrigger",
       "direction": "in",
-      "path": "outcontainer/topic-detection",
+      "path": "outcontainer/{name}",
       "connection": "newstopic852_STORAGE"
     },
     {
       "type": "blob",
       "name": "$return",
-      "path": "outcontainer2/topic-detection",
+      "path": "outcontainer2/{name}",
       "connection": "newstopic852_STORAGE",
       "direction": "out"
     }

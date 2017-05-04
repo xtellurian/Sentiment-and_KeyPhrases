@@ -58,28 +58,15 @@ namespace Rian.Cognitive {
             this.RunTopicDetectionAsync().Wait();
         }
         
+        
 
-        public async Task<ArticleDataAggregate> DownloadLastTopicDetection()
+        public async Task<ArticleDataAggregate> GetLatest()
         {
-            var functionLocation = ConfigurationWrapper.Config["LatestDataUri"];
-            var latest = new GetLatestData(functionLocation);
+            var functionLocation = ConfigurationWrapper.Config["LatestDataV2Uri"];
+            var latest = new GetLatestDataV2(functionLocation);
             var response = await latest.Run();
-            var convertedResponse = latest.Convert(response);
-            var averagedResponse = latest.AverageSentimentsOverTopcs(convertedResponse);
+            var averagedResponse = latest.AverageSentimentsOverTopcs(response);
             return averagedResponse;;
-        }
-
-
-
-        private async Task AnalyseArticles(List<Article> articles)
-        {
-            var key = ConfigurationWrapper.Config["CognitiveServicesTextApiKey"];
-            ICognitiveServicesTextAnalysis textAnalysis =
-                new CognitiveServicesTextAnalysis(key);
-
-            var analyser = new ArticleAnalyser(textAnalysis, _logger, _output);
-            await analyser.AnalyseArticles(articles);
-
         }
 
         private async Task LoadArticles(SourceResponse sourceResponse)

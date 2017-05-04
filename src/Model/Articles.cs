@@ -7,7 +7,7 @@ namespace Rian.Cognitive {
         
     public class Article
     {
-        public Guid? Id { get;set;}
+        public string Id { get;set;}
         
         [JsonProperty("author")]
         public string Author { get; set; }
@@ -21,7 +21,7 @@ namespace Rian.Cognitive {
         public string UrlToImage { get; set; }
         [JsonProperty("publishedAt")]
         public DateTime? PublishedAt { get; set; }
-        public List<string> KeyPhrases {get;set;}
+        public List<string> KeyPhrases {get;set;} // currently not using this
         [DisplayFormat(DataFormatString = "{0:P0}")]
         public double Sentiment {get;set;}
         public string Language {get;set;}

@@ -1,5 +1,5 @@
 #r "Newtonsoft.Json"
-#load "Documents.csx"
+#load "documents.csx"
 
 using System;
 using System.Net;
@@ -7,7 +7,7 @@ using System.Configuration;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
-public static async Task<string> Run(string myBlob, TraceWriter log)
+public static async Task<string> Run(string myBlob, string name, TraceWriter log)
 {
     log.Info($"C# Blob trigger function Processed blob \n Size: {myBlob.Length} Bytes");
     var key = ConfigurationManager.AppSettings["cognitive_api_key"];

@@ -23,7 +23,7 @@ namespace Sentiment_And_KeyPhrases.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var data = await _manager.DownloadLastTopicDetection();
+            var data = await _manager.GetLatest();
             
             return Ok(JsonConvert.SerializeObject(data));
         }

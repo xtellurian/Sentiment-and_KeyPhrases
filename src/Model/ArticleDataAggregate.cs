@@ -8,11 +8,11 @@ namespace Rian.Cognitive
     {
         public MetaData Meta {get;set;}
 
-        public List<Article> Articles {get;protected set;}
+        public List<Article> Articles {get; set;}
 
-        public List<SourceBase> Sources {get;protected set;}
+        public List<SourceBase> Sources {get; set;}
 
-        public List<Topic> Topics {get;protected set;}
+        public List<Topic> Topics {get; set;}
 
         private object _articleLock = new object();
         public void AddArticlesThreadsafe (IEnumerable<Article> articles)

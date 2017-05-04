@@ -38,7 +38,8 @@ namespace Sentiment_And_KeyPhrases.Controllers
         {
             Debug.WriteLine("Refreshing Data");
             _dataBirth = DateTime.Now;
-            _data = await _manager.DownloadLastTopicDetection();
+            // _data = await _manager.DownloadLastTopicDetection();
+            _data = await _manager.GetLatest();
         }
 
         public async Task<IActionResult> Detail (string id) // id = topicId
