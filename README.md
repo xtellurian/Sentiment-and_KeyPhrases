@@ -2,6 +2,10 @@
 Playing around with MS Cognitive Services. 
 Taking news article summaries from around the world and generating summaries using key phrases and sentiment detection.
 
+# We're Live!
+
+http://news-sentiment.azurewebsites.net/
+
 # Getting Started
 
 1) git pull https://github.com/xtellurian/Sentiment-and_KeyPhrases
