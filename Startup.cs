@@ -15,12 +15,20 @@ namespace Sentiment_And_KeyPhrases
     {
         public Startup(IHostingEnvironment env)
         {
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
             Configuration = builder.Build();
+
             ConfigurationWrapper.Config = Configuration;
         }
 
@@ -47,7 +55,6 @@ namespace Sentiment_And_KeyPhrases
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                app.UseDeveloperExceptionPage();// remove me later
             }
 
             app.UseStaticFiles();

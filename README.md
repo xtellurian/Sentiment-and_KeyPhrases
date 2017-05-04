@@ -12,20 +12,15 @@ http://news-sentiment.azurewebsites.net/
 
 2) Create Azure Functions (code provided)
 
-3) Create appsettings.json
-
-    a) Add Cognitive Services Key & News API Key
-
-    b) Add URLs for Azure Functions
+3) Add secrets for development
 
 ```
-{
-  "NewsApiKey" : "<YOUR-KEY>",
-  "CognitiveServicesTextApiKey" : "<YOUR-KEY>",
-  "PollAndStoreV2FunctionUri": "<URL + code>",
-  "LatestDataV2Uri": "<URL + code>"
-}
+dotnet user-secrets set NewsApiKey <YOUR-KEY>
+dotnet user-secrets set CognitiveServicesTextApiKey <YOUR-KEY>
+dotnet user-secrets set PollAndStoreV2FunctionUri <YOUR-URI>
+dotnet user-secrets set LatestDataV2Uri <YOUR-URI>
 ```
+
 
 4) `dotnet restore`
 
@@ -57,19 +52,3 @@ https://newsapi.org
 - [ ] Store data to discover trends
 - [ ] Move data calls to JS front end for faster page load times
 
-# Sample Output (Original)
-
-COUNT x PHRASE -- SENTIMENT
-
-```
-7 x North Korea -- 45%
-6 x police officer -- 12%
-5 x President Donald Trump -- 41%
-5 x Manchester United -- 68%
-4 x central Paris -- 26%
-4 x Champs Elysees -- 9%
-4 x Fox News -- 26%
-4 x general election -- 49%
-3 x presidential election -- 53%
-3 x French election -- 26%
-```
