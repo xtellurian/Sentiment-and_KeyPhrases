@@ -8,7 +8,7 @@ http://news-sentiment.azurewebsites.net/
 
 # Getting Started
 
-1) git pull https://github.com/xtellurian/Sentiment-and_KeyPhrases
+1) `git pull https://github.com/xtellurian/Sentiment-and_KeyPhrases`
 
 2) Create Azure Functions (code provided)
 
@@ -27,9 +27,9 @@ http://news-sentiment.azurewebsites.net/
 }
 ```
 
-4) dotnet restore
+4) `dotnet restore`
 
-5) dotnet run
+5) `dotnet run`
 
 
 
