@@ -10,9 +10,22 @@ http://news-sentiment.azurewebsites.net/
 
 1) git pull https://github.com/xtellurian/Sentiment-and_KeyPhrases
 
-2) Create 3 Azure Functions (code provided)
+2) Create Azure Functions (code provided)
 
-3) Create API Keys and Azure Functions files
+3) Create appsettings.json
+
+    a) Add Cognitive Services Key & News API Key
+
+    b) Add URLs for Azure Functions
+
+```
+{
+  "NewsApiKey" : "<YOUR-KEY>",
+  "CognitiveServicesTextApiKey" : "<YOUR-KEY>",
+  "PollAndStoreV2FunctionUri": "<URL + code>",
+  "LatestDataV2Uri": "<URL + code>"
+}
+```
 
 4) dotnet restore
 
@@ -23,11 +36,9 @@ http://news-sentiment.azurewebsites.net/
 # Requirements 
 
 * DotNetCore
-* Json.Net
 * News Api Key
 * Ms Cognitive Services - Text Analytics Api Key
-
-Place the Api Keys in their respective files. See Utility.cs
+* Azure Functions Account
 
 Thanks to :
 
@@ -39,12 +50,12 @@ https://newsapi.org
 
 - [x] Refactor Data Model
 - [x] Cache machanism in ASP.NET for improved performance
+- [x] Extend response from LastTopicDetection to include articles that are returned
+- [x] Implement Azure Topic Detection
 - [ ] Front End Improvements
 - [ ] Better logging in Azure Functions
 - [ ] Store data to discover trends
 - [ ] Move data calls to JS front end for faster page load times
-- [x] Extend response from LastTopicDetection to include articles that are returned
-- [x] Implement Azure Topic Detection
 
 # Sample Output (Original)
 
