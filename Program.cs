@@ -12,6 +12,8 @@ namespace Sentiment_And_KeyPhrases
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
+                .CaptureStartupErrors(true) // for dev
+                .UseSetting("detailedErrors","true") // for dev
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
