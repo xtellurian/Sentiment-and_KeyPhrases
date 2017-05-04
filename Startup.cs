@@ -47,6 +47,7 @@ namespace Sentiment_And_KeyPhrases
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseDeveloperExceptionPage();// remove me later
             }
 
             app.UseStaticFiles();
