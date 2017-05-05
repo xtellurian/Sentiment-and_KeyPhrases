@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using SentimentalNews.Model;
 
-namespace Rian.Cognitive 
+namespace SentimentalNews.CognitiveServices
 {
 
     public class TopicAssignment

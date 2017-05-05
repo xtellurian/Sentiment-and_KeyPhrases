@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using SentimentalNews.Model;
 
-namespace Rian.Cognitive {
+namespace SentimentalNews.Services {
         
 
     public interface ICognitiveServicesTextAnalysis

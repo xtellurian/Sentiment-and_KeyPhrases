@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace Rian.Cognitive {
+namespace SentimentalNews.CognitiveServices {
 
     public class TopicDetectionService
     {
@@ -26,27 +26,6 @@ namespace Rian.Cognitive {
             return resultLocation;
          }
 
-         public async Task<TopicDetectionResponse> GetProcessedDocuments(string location, 
-            int retries = 20, int interval = 20) {
-                
-                var results = await GetResults(location);
-                var tries = 0;
-
-                 while( results.Result == null || string.Equals(results.Status, "Running")){
-                     if(tries++ > retries) break;
-                     await Task.Delay(interval * 1000);
-                     results = await GetResults(location);
-
-                 }
-            
-            return results;
-        }
-
-        private async Task<TopicDetectionResponse> GetResults(string location) {
-                var topics = await _httpClient.GetAsync(location);
-                var content = await topics.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<TopicDetectionResponse>(content);
-        }
     }
 
     

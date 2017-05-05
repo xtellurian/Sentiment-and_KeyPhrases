@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace Rian.Cognitive {
+namespace SentimentalNews.Model {
         
     public class Source : SourceBase 
     {
@@ -15,7 +15,6 @@ namespace Rian.Cognitive {
 
         // public List<Article> Articles {get; private set;}
 
-        public ILogger Logger {get;set;}
         public async Task<int> LoadArticles()
         {
             if(string.IsNullOrEmpty(_apiKey)) throw new NullReferenceException("Api Key is Null");
@@ -38,13 +37,13 @@ namespace Rian.Cognitive {
                     a.Language = language;
                     a.Id = Guid.NewGuid().ToString(); // articles don't come with unique Ids
                 }
-                Logger?.Log($"Loaded {Articles.Count} articles from {name}");
+                Debug.WriteLine($"Loaded {Articles.Count} articles from {name}");
                 return Articles.Count;
             }  
             catch(HttpRequestException e)
             {
-                Logger?.Log("\nException Caught!");    
-                Logger?.Log("Message :{0} " + e.Message);
+                Debug.WriteLine("\nException Caught!");    
+                Debug.WriteLine("Message :{0} " + e.Message);
             }
 
             client.Dispose();

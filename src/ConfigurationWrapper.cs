@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
 
-namespace Rian
+namespace SentimentalNews.Web
 {
     public static class ConfigurationWrapper 
     {

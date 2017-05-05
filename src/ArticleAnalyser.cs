@@ -2,20 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SentimentalNews.Services;
 
-namespace Rian.Cognitive {
+namespace SentimentalNews.Model {
 
 
     public class ArticleAnalyser 
     {
         private ICognitiveServicesTextAnalysis _congitiveService;
-        private ILogger _logger;
-        private IOut _output;
-        public ArticleAnalyser(ICognitiveServicesTextAnalysis cognitiveService, ILogger logger, IOut output)
+
+        public ArticleAnalyser(ICognitiveServicesTextAnalysis cognitiveService)
         {
             _congitiveService = cognitiveService;
-            _logger = logger;
-            _output = output;
         }
 
         public async Task<IEnumerable<Article>> AnalyseArticles(List<Article> articles)

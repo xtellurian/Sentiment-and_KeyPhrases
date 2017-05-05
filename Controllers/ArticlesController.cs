@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Rian.Cognitive;
+using SentimentalNews;
 
 namespace Sentiment_And_KeyPhrases.Controllers
 {

@@ -2,9 +2,9 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Rian.Cognitive;
+using SentimentalNews.Model;
 
-namespace Rian.AzureFunctions
+namespace SentimentalNews.AzureFunctions
 {
     public class PollAndStoreV2
     {

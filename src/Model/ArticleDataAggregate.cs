@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace Rian.Cognitive
+namespace SentimentalNews.Model
 {
     public class ArticleDataAggregate
     {

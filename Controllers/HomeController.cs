@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Rian.Cognitive;
+using SentimentalNews;
 
 namespace Sentiment_And_KeyPhrases.Controllers
 {

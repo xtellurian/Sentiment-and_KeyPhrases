@@ -1,4 +1,4 @@
-@model Rian.Cognitive.ArticleDataAggregate
+@model SentimentalNews.Model.ArticleDataAggregate
 
 @{
     ViewData["Title"] = "Home Page";
@@ -12,8 +12,7 @@
         a=>a.TopicAssignments.Any(b=>b.TopicId == highestSentimentTopic.Id)).UrlToImage;
     var lowestSentimentTopic = orderedBySentiment.Last();
     var lowestSentimentImageUrl = Model.Articles.FirstOrDefault(
-        a=>a.TopicAssignments.Any(b=>b.TopicId == lowestSentimentTopic.Id)).UrlToImage;
-}
+        a=>a.TopicAssignments.Any(b=>b.TopicId == lowestSentimentTopic.Id)).UrlToImage; }
 
 
 <div class="container-fluid">

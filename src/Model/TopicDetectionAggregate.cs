@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using SentimentalNews.CognitiveServices;
 
-namespace Rian.Cognitive
+namespace SentimentalNews.Model
 {
     public class TopicDetectionAggregate : TopicDetectionResponse 
     {

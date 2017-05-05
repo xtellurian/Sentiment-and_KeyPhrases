@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Rian.Cognitive {
+namespace SentimentalNews.Model {
         
     public class UrlsToLogos
     {

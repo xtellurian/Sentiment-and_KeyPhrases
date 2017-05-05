@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using SentimentalNews.Model;
 
-namespace Rian.Cognitive {
+namespace SentimentalNews.CognitiveServices 
+{
     
-
-
     public class TopicDetectionRequest
     {
     public static TopicDetectionRequest CreateRequest (IEnumerable<Article> articles)

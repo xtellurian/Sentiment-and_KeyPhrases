@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using SentimentalNews.CognitiveServices;
 
-namespace Rian.Cognitive {
+namespace SentimentalNews.Model {
         
     public class Article
     {

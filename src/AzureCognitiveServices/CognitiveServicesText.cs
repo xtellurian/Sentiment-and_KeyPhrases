@@ -5,8 +5,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SentimentalNews.Model;
+using SentimentalNews.Services;
 
-namespace Rian.Cognitive {
+namespace SentimentalNews.CognitiveServices {
         
 
     /// <summary>

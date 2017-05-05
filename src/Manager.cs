@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Rian.AzureFunctions;
+using SentimentalNews.AzureFunctions;
+using SentimentalNews.CognitiveServices;
+using SentimentalNews.Model;
+using SentimentalNews.Web;
 
-namespace Rian.Cognitive {
+namespace SentimentalNews {
         
     public class Manager
     {
@@ -15,11 +18,6 @@ namespace Rian.Cognitive {
         }
         protected Manager()
         {
-        }
-
-        public void Log(string line)
-        {
-            Console.WriteLine(line);
         }
 
 
