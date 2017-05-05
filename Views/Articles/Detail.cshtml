@@ -64,7 +64,11 @@
                     <tbody>
                         @foreach(var topic in Model.TopicAssignments){
                             <tr>
-                                <td>@Html.DisplayFor(itemModel=>topic.TopicId)</td>
+                                <td>
+                                    @Html.ActionLink(@topic.TopicKeyPhrase,
+                                     "Detail", "Topics", new { id = topic.TopicId }, null)
+                                    
+                                </td>
                             </tr>
                         }
                         

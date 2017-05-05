@@ -26,6 +26,7 @@ namespace Rian.Cognitive {
         [DisplayFormat(DataFormatString = "{0:P0}")]
         public double Sentiment {get;set;}
         public string Language {get;set;}
+        [Display(Name = "Associated Topics")]
         public List<TopicAssignment> TopicAssignments {get;set;}
 
     }

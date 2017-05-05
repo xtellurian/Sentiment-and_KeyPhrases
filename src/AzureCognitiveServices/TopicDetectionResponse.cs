@@ -13,6 +13,8 @@ namespace Rian.Cognitive
         public string DocumentId { get; set; }
         [JsonProperty("distance")]
         public float Distance { get; set; }
+        [JsonProperty("topicKeyPhrase")]
+        public string TopicKeyPhrase {get;set;}
     }
 
     public class OperationResult
