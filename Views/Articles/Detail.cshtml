@@ -1,0 +1,76 @@
+@model Rian.Cognitive.Article
+
+@section Scripts {
+}
+
+<div class="container-fluid">
+    <span class="pull-right"><h4><a href="javascript:void(0);" onclick="history.go(-1);">Back</a></h4></span>
+</div>
+<div class="container-fluid">
+    <h3>@ViewData["Title"]</h3> 
+    <p> @Model.Author </p>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <span class=""> <img class="fit-image" src="@Model.UrlToImage"/> </span>
+            <br> &nbsp;
+        </div>
+        <div class="col-md-6">
+            <div>
+                <span class="pull-left">
+                    @Html.DisplayFor(modelItem => Model.Description)
+                </span>
+            </div>
+            <br> &nbsp;
+            <div>
+                <table class="table table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(modelItem=> Model.Sentiment)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(modelItem=>Model.PublishedAt)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(modelItem=>Model.Url)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem=> Model.Sentiment) 
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.PublishedAt)
+                            </td>
+                            <td>
+                                <a href="@Model.Url" target="=_blank">@Model.Title</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(itemModel=>Model.TopicAssignments)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var topic in Model.TopicAssignments){
+                            <tr>
+                                <td>@Html.DisplayFor(itemModel=>topic.TopicId)</td>
+                            </tr>
+                        }
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

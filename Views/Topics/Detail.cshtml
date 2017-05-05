@@ -22,15 +22,10 @@
                     @Html.DisplayNameFor(model => model.Title)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Author)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PublishedAt)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Sentiment)
                 </th>
-            <th></th>
+                <th>
+                </th>
         </tr>
     </thead>
     <tbody>
@@ -38,17 +33,12 @@
         <tr data-color="@item.Sentiment">
             <td>
                 <a href="@item.Url" target="=_blank">@Html.DisplayFor(modelItem => item.Title)</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PublishedAt)
-            </td>
+            </td>>
             <td>
                 @Html.DisplayFor(modelItem => item.Sentiment)
             </td>
             <td>
+                @Html.ActionLink("Details", "Detail", "Articles", new { id = item.Id }, null)
             </td>
         </tr>
 }

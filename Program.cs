@@ -13,12 +13,7 @@ namespace Sentiment_And_KeyPhrases
         public static void Main(string[] args)
         {
             if (!args.Any(s => string.Equals(s, "--environment"))){
-                Console.WriteLine(@"Usage: dotnet run --environment 'Development'");
-                Console.WriteLine("Defaulting to Production Environment");
-                var argList = new List<string>(args);
-                argList.Add("--environment");
-                argList.Add("Production");
-                args = argList.ToArray();
+                Console.WriteLine("WARNING: Production Environment may be missing secrets");
             }
             
             var config = new ConfigurationBuilder()   // enabled command line environment spec

@@ -22,6 +22,7 @@ namespace Rian.Cognitive {
         [JsonProperty("publishedAt")]
         public DateTime? PublishedAt { get; set; }
         public List<string> KeyPhrases {get;set;} // currently not using this
+
         [DisplayFormat(DataFormatString = "{0:P0}")]
         public double Sentiment {get;set;}
         public string Language {get;set;}
