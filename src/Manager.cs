@@ -5,23 +5,16 @@ using Rian.AzureFunctions;
 
 namespace Rian.Cognitive {
         
-    public class Manager: ILogger, IOut
+    public class Manager
     {
-        private ILogger _logger;
-        private IOut _output;
-
-        public Manager()
+        private static Manager _instance;
+        public static Manager GetInstance ()
         {
-            _logger =  this;
-            _output =  this;
+            if(_instance==null) _instance = new Manager();
+            return _instance;
         }
-        public Manager(ILogger logger = null, IOut output = null)
+        protected Manager()
         {
-            // set the logger and the output here
-            // you can set 'this for both if you want console out
-
-            _logger = logger ?? this;
-            _output = output ?? this;
         }
 
         public void Log(string line)
@@ -45,7 +38,6 @@ namespace Rian.Cognitive {
              var service = new TopicDetectionService(key);
              var request = TopicDetectionRequest.CreateRequest(articles);
              var location = await service.Post(request);
-             _logger.Log(location);
 
              var functionLocation = ConfigurationWrapper.Config["PollAndStoreV2FunctionUri"];
              var upload = new PollAndStoreV2(location, functionLocation, sourceResponse);
@@ -59,14 +51,23 @@ namespace Rian.Cognitive {
         }
         
         
+        private ArticleDataAggregate _cachedData;
+        public async Task<ArticleDataAggregate> GetLatest(bool fromCache = true)
+        {
+            if(fromCache == false || _cachedData == null)
+            {
+                _cachedData = await GetLatestFromRemote();
+            }
+            return _cachedData;
+        }
 
-        public async Task<ArticleDataAggregate> GetLatest()
+        private async Task<ArticleDataAggregate> GetLatestFromRemote()
         {
             var functionLocation = ConfigurationWrapper.Config["LatestDataV2Uri"];
             var latest = new GetLatestDataV2(functionLocation);
             var response = await latest.Run();
             var averagedResponse = latest.AverageSentimentsOverTopcs(response);
-            return averagedResponse;;
+            return averagedResponse;
         }
 
         private async Task LoadArticles(SourceResponse sourceResponse)
@@ -80,19 +81,13 @@ namespace Rian.Cognitive {
             await Task.WhenAll(tasks);
         }
 
-        public void WriteOut(string line)
-        {
-            Console.WriteLine(line);
-        }
-
         private async Task<SourceResponse> LoadSources() 
         {
             var key = ConfigurationWrapper.Config["NewsApiKey"];
             Source.SetApiKey(key);
 
-            var sourceResponse = await Source.GetSourcesAsync(_logger, Language.en);
+            var sourceResponse = await Source.GetSourcesAsync( Language.en);
             
-            _logger.Log($"Found {sourceResponse.sources.Count} Sources");
 
             return sourceResponse;
         }

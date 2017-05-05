@@ -1,9 +1,31 @@
+@model Rian.Cognitive.ArticleDataAggregate
+
 @{
     ViewData["Title"] = "Home Page";
+    var mostPopularTopics = Model.Topics.OrderByDescending(item => item.Score).First();
 }
 
-<h2> Welcome to Sentimental News</h2>
-<p> Click below to get started</p>
+
+<div class="container-fluid">
+    <h2> Welcome to Sentimental News <br> &nbsp;</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Most Popular</h4>
+        </div>
+        <div class="col-md-4">
+            topic with highest average Sentimental
+        </div>
+        <div class="col-md-4">
+            topic with lowest average Sentimental
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 
 
 <input type="button" class="my-button" value="Get Started" name="Get Started" 

@@ -9,17 +9,16 @@ namespace Sentiment_And_KeyPhrases.Controllers
 {
     public class HomeController : Controller
     {
-        private Task _startDownloading;
-        private Manager _manager;
+       private Manager _manager;
         public HomeController()
         {
-             _manager = new Manager();
-             _startDownloading = _manager.GetLatest();
+             _manager = Manager.GetInstance();
              
         }
         public IActionResult Index()
         {
-            return View();
+            var data = _manager.GetLatest();
+            return View(data);
         }
 
         public IActionResult About()

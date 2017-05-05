@@ -13,41 +13,22 @@ namespace Sentiment_And_KeyPhrases.Controllers
     public class ArticlesController : Controller
     {
         private Manager _manager;
-        private static ArticleDataAggregate _data;
-        private static DateTime _dataBirth;
-        private const int DataMaxAgeMinutes = 20;
         public ArticlesController()
         {
-            _manager = new Manager();
+            _manager = Manager.GetInstance();
             
         }
         public async Task<IActionResult> Index()
         {
-            if(IsRefreshData()){
-                await RefreshData();
-            }
             
             return View();
-        }
-        private bool IsRefreshData()
-        {
-            return _data == null || _dataBirth.AddMinutes(DataMaxAgeMinutes) < DateTime.Now;
-        }
-
-        private async Task RefreshData ()
-        {
-            Debug.WriteLine("Refreshing Data");
-            _dataBirth = DateTime.Now;
-            // _data = await _manager.DownloadLastTopicDetection();
-            _data = await _manager.GetLatest();
         }
 
         public async Task<IActionResult> Detail (string id) // id = articleId
         {
-            if(IsRefreshData()) await RefreshData();
-
+            var data = await _manager.GetLatest();
             // get document ids
-            var article = _data.Articles.FirstOrDefault(a=>a.Id == id);
+            var article = data.Articles.FirstOrDefault(a=>a.Id == id);
             // get documents and display
             if(article==null){
                 throw new Exception($"{id} not found");

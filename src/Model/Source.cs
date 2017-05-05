@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -55,7 +56,7 @@ namespace Rian.Cognitive {
             _apiKey = apiKey;
         }
 
-        public static async Task<SourceResponse> GetSourcesAsync(ILogger logger, Language language = Language.all)
+        public static async Task<SourceResponse> GetSourcesAsync( Language language = Language.all)
         {
         // Create a New HttpClient object.
             HttpClient client = new HttpClient();
@@ -73,15 +74,13 @@ namespace Rian.Cognitive {
 
                 var result = JsonConvert.DeserializeObject<SourceResponse>(responseBody);
                 client.Dispose();
-                foreach(var source in result.sources){
-                    source.Logger = logger;
-                }
+
                 return result;
             }  
             catch(HttpRequestException e)
             {
-                logger?.Log("\nException Caught!");    
-                logger?.Log("Message :{0} " + e.Message);
+                Debug.WriteLine("\nException Caught!");    
+                Debug.WriteLine("Message :{0} " + e.Message);
             }
 
             client.Dispose();

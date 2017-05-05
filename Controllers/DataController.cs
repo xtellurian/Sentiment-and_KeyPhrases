@@ -18,7 +18,7 @@ namespace Sentiment_And_KeyPhrases.Controllers
         {
             _data = new List<string>();
 
-            _manager = new Manager();
+            _manager = Manager.GetInstance();
 
         }
         public async Task<IActionResult> Index()
