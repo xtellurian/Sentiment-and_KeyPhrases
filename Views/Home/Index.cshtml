@@ -2,7 +2,17 @@
 
 @{
     ViewData["Title"] = "Home Page";
-    var mostPopularTopics = Model.Topics.OrderByDescending(item => item.Score).First();
+    var mostPopularTopic = Model.Topics.OrderByDescending(item => item.Score).First();
+    var mostPopularImageUrl = Model.Articles.FirstOrDefault(
+        a=>a.TopicAssignments.Any(b=>b.TopicId == mostPopularTopic.Id)).UrlToImage;
+
+    var orderedBySentiment = Model.Topics.OrderByDescending(item => item.AverageSentiment);
+    var highestSentimentTopic = orderedBySentiment.First();
+    var highestSentimentImageUrl = Model.Articles.FirstOrDefault(
+        a=>a.TopicAssignments.Any(b=>b.TopicId == highestSentimentTopic.Id)).UrlToImage;
+    var lowestSentimentTopic = orderedBySentiment.Last();
+    var lowestSentimentImageUrl = Model.Articles.FirstOrDefault(
+        a=>a.TopicAssignments.Any(b=>b.TopicId == lowestSentimentTopic.Id)).UrlToImage;
 }
 
 
@@ -10,25 +20,28 @@
     <h2> Welcome to Sentimental News <br> &nbsp;</h2>
     <div class="row">
         <div class="col-md-4">
-            <h4>Most Popular</h4>
+            <h4>Most Popular (@Html.DisplayFor(m=>mostPopularTopic.Score))</h4>
+            <h5> @Html.ActionLink(@mostPopularTopic.KeyPhrase, "Detail", "Topics", 
+                new { id = mostPopularTopic.Id }, null)
+            </h5>
+            <img class="fit-image" src=@mostPopularImageUrl />
+            
         </div>
         <div class="col-md-4">
-            topic with highest average Sentimental
+            <h4>Highest Sentiment (@Html.DisplayFor(m=>highestSentimentTopic.AverageSentiment))</h4>
+            <h5> @Html.ActionLink(@highestSentimentTopic.KeyPhrase, "Detail", "Topics", 
+                new { id = highestSentimentTopic.Id }, null)
+            </h5>
+            <img class="fit-image" src=@highestSentimentImageUrl />
         </div>
         <div class="col-md-4">
-            topic with lowest average Sentimental
+            <h4>Lowest Sentiment (@Html.DisplayFor(m=>lowestSentimentTopic.AverageSentiment))</h4>
+            <h5> @Html.ActionLink(@lowestSentimentTopic.KeyPhrase, "Detail", "Topics", 
+                new { id = lowestSentimentTopic.Id }, null)
+            </h5>
+            <img class="fit-image" src=@lowestSentimentImageUrl />
         </div>
     </div>
 </div>
 
 
-
-
-
-
-
-
-<input type="button" class="my-button" value="Get Started" name="Get Started" 
-     onclick="@("location.href='" 
-        + Url.Action("Index", "Topics")  
-        + "'")" />

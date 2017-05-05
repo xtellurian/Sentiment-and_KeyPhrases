@@ -15,9 +15,9 @@ namespace Sentiment_And_KeyPhrases.Controllers
              _manager = Manager.GetInstance();
              
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var data = _manager.GetLatest();
+            var data = await _manager.GetLatest();
             return View(data);
         }
 
