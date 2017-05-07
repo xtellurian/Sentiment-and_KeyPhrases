@@ -48,7 +48,8 @@ https://newsapi.org
 - [x] Extend response from LastTopicDetection to include articles that are returned
 - [x] Implement Azure Topic Detection
 - [x] Image Analysis
-- [ ] Fix Function Workflow so data still available during refresh
+- [x] Fix Function Workflow so data still available during refresh
+- [ ] Testing Framework
 - [ ] Entity Linking to merge topics
 - [ ] Bing News Search API
 - [ ] Azure KES?

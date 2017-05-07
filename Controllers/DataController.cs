@@ -21,11 +21,17 @@ namespace Sentiment_And_KeyPhrases.Controllers
             _manager = Manager.GetInstance();
 
         }
+
+        public async Task<IActionResult> Refresh()
+        {
+            var data = await _manager.GetLatest(false);
+            return Ok(data);
+        }
         public async Task<IActionResult> Index()
         {
             var data = await _manager.GetLatest();
             
-            return Ok(JsonConvert.SerializeObject(data));
+            return Ok(data);
         }
 
         public async Task<IActionResult> Renew() 
