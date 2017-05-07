@@ -27,8 +27,10 @@ namespace Sentiment_And_KeyPhrases.Controllers
         public async Task<IActionResult> Detail (string id) // id = articleId
         {
             var data = await _manager.GetLatest();
+            var imageData = await _manager.GetImageAnalysis(id);
             // get document ids
             var article = data.Articles.FirstOrDefault(a=>a.Id == id);
+            article.SetImageAnalysis(imageData);
             // get documents and display
             if(article==null){
                 throw new Exception($"{id} not found");

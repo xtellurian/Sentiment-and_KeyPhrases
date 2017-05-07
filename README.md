@@ -47,8 +47,13 @@ https://newsapi.org
 - [x] Cache machanism in ASP.NET for improved performance
 - [x] Extend response from LastTopicDetection to include articles that are returned
 - [x] Implement Azure Topic Detection
+- [ ] Image Analysis
+- [ ] Entity Linking to merge topics
+- [ ] Bing News Search API
+- [ ] Azure KES?
 - [ ] Front End Improvements
 - [ ] Better logging in Azure Functions
 - [ ] Store data to discover trends
 - [ ] Move data calls to JS front end for faster page load times
+
 

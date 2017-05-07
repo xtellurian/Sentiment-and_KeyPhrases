@@ -59,6 +59,13 @@ namespace SentimentalNews {
             return _cachedData;
         }
 
+        public async Task<AnalyseImageResponse> GetImageAnalysis(string articleId)
+        {
+            var uri = ConfigurationWrapper.Config["ImageAnalysisUri"];
+            var request = new GetImageAnalysis(uri, articleId);
+            return await request.Run();
+        }
+
         private async Task<ArticleDataAggregate> GetLatestFromRemote()
         {
             var functionLocation = ConfigurationWrapper.Config["LatestDataV2Uri"];

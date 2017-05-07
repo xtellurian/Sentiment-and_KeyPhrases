@@ -14,8 +14,73 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
-            <span class=""> <img class="fit-image" src="@Model.UrlToImage"/> </span>
+            <span > <img class="fit-image" src="@Model.UrlToImage"/> </span>
             <br> &nbsp;
+            <div>
+                <table class="table">
+                    @{var caption = @Model.ImageAnalysis.Description.Captions.FirstOrDefault();}
+                    @{var tags = string.Join(", ", Model.ImageAnalysis.Description.Tags);}
+                    @{var peopleCategories = @Model.ImageAnalysis.Categories.Where(c=> c.Detail?.Celebrities!=null);}
+                    <tbody>
+                        <thead>
+                            <tr>
+                                <th>
+                                    AI Property
+                                </th>
+                                <th>
+                                    Value
+                                </th>
+                                <th>
+                                    AI Confidence Level
+                                </th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>
+                                Caption
+                            </td>
+                            <td>
+                                @Html.DisplayFor(c=>caption.Text)
+                            </td>
+                            <td>
+                                 @Html.DisplayFor(c=>caption.Confidence)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            AI Generated Image Tags
+                            </td>
+                            <td>
+                                @tags
+                            </td>
+                            <td></td>
+                        </tr>
+
+@if (peopleCategories != null ){
+    foreach(var category in peopleCategories)
+    {
+        if(category.Detail != null && category.Detail.Celebrities!=null)
+        {
+            foreach(var celeb in category.Detail.Celebrities){
+                        <tr>
+                            <td>
+                                Celebrity Detected
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m=>celeb.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m=>celeb.Confidence)
+                            </td>
+                        </tr>
+            }
+        }   
+    }                       
+}
+                        
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="col-md-6">
             <div>

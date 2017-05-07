@@ -4,7 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using SentimentalNews.CognitiveServices;
 
-namespace SentimentalNews.Model {
+namespace SentimentalNews.Model 
+{
         
     public class Article
     {
@@ -29,7 +30,12 @@ namespace SentimentalNews.Model {
         public string Language {get;set;}
         [Display(Name = "Associated Topics")]
         public List<TopicAssignment> TopicAssignments {get;set;}
+        public AnalyseImageResponse ImageAnalysis {get;private set;} // this is set by a different call, not in initial req
 
+        public void SetImageAnalysis(AnalyseImageResponse response)
+        {
+            ImageAnalysis = response;
+        }
     }
 
     public class ArticleResponse
