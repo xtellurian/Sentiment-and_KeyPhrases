@@ -27,7 +27,7 @@ namespace Sentiment_And_KeyPhrases.Controllers
         public async Task<IActionResult> Detail (string id) // id = articleId
         {
             var data = await _manager.GetLatest();
-            var imageData = await _manager.GetImageAnalysis(id);
+            var imageData = await _manager.GetImageAnalysis(id); // need to fix this = when it return null
             // get document ids
             var article = data.Articles.FirstOrDefault(a=>a.Id == id);
             article.SetImageAnalysis(imageData);
