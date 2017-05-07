@@ -47,7 +47,8 @@ https://newsapi.org
 - [x] Cache machanism in ASP.NET for improved performance
 - [x] Extend response from LastTopicDetection to include articles that are returned
 - [x] Implement Azure Topic Detection
-- [ ] Image Analysis
+- [x] Image Analysis
+- [ ] Fix Function Workflow so data still available during refresh
 - [ ] Entity Linking to merge topics
 - [ ] Bing News Search API
 - [ ] Azure KES?
