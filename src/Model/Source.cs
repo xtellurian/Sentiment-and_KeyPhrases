@@ -55,13 +55,13 @@ namespace SentimentalNews.Model {
             _apiKey = apiKey;
         }
 
-        public static async Task<SourceResponse> GetSourcesAsync( Language language = Language.all)
+        public static async Task<SourceResponse> GetSourcesAsync( string language = null)
         {
         // Create a New HttpClient object.
             HttpClient client = new HttpClient();
             string url = sourcesUrl;
-            if(language!=Language.all){
-                url += "?language=" + Enum.GetName(typeof(Language), language);
+            if(language!= null){
+                url += "?language=" + language;
             }
             
             // Call asynchronous network methods in a try/catch block to handle exceptions

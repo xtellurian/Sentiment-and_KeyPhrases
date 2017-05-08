@@ -42,11 +42,6 @@ namespace SentimentalNews {
              await upload.Run();
 
         }
-
-        public void RunTopicDetectionSynchronous()
-        {
-            this.RunTopicDetectionAsync().Wait();
-        }
         
         
         private ArticleDataAggregate _cachedData;
@@ -91,7 +86,7 @@ namespace SentimentalNews {
             var key = ConfigurationWrapper.Config["NewsApiKey"];
             Source.SetApiKey(key);
 
-            var sourceResponse = await Source.GetSourcesAsync( Language.en);
+            var sourceResponse = await Source.GetSourcesAsync( "en");
             
 
             return sourceResponse;
