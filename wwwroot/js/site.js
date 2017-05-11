@@ -43,7 +43,9 @@ function between(x, min, max) {
 }
 
 function topicsTable(){
-  var table = $('#topics').DataTable();
+  var table = $('#topics').DataTable({
+    
+  });
  
   table
       .column( '0:visible' )
@@ -58,4 +60,17 @@ function articlesTable(){
   //     .column( '0:visible' )
   //     .order( 'desc' )
   //     .draw();
+}
+
+function sourceDetailTable() {
+  var path = '../../data/source/'.concat('@sourceId')
+  $('#sources').DataTable( {
+    "ajax": path,
+    "columns": [
+      { "data": "Title" },
+      { "data": "Author" },
+      { "data": "Description" },
+      { "data": "Sentiment" }
+    ]
+  } );
 }

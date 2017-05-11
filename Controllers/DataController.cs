@@ -6,7 +6,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SentimentalNews;
+using SentimentalNews.AzureFunctions;
+using SentimentalNews.Web;
 
 namespace Sentiment_And_KeyPhrases.Controllers
 {
@@ -20,6 +23,22 @@ namespace Sentiment_And_KeyPhrases.Controllers
 
             _manager = Manager.GetInstance();
 
+        }
+
+        public async Task<IActionResult> Source (string id)
+        {
+            var uri = ConfigurationWrapper.Config["ArticlesFromSourceUri"];
+            var function = new GetArticlesFromSource(uri, id);
+            var result = await function.Run();
+            return Ok(result);
+        }
+
+        public async Task<IActionResult> AllSources ()
+        {
+            var data = await _manager.GetLatest();
+            var jobj = new JObject();
+            jobj["data"] = JToken.FromObject(data.Sources);
+            return Ok(jobj);
         }
 
         public async Task<IActionResult> Refresh()

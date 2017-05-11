@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using SentimentalNews.AzureFunctions;
 using SentimentalNews.CognitiveServices;
 using SentimentalNews.Model;
