@@ -14,7 +14,7 @@ namespace SentimentalNews.AzureFunctions
 
         public GetArticlesFromSource(string functionUri, string sourceId, int numDays = 1)
         {
-
+            if(numDays < 1) numDays = 1;
             _client = new HttpClient();
             sourceId = sourceId.Replace("-",""); // strip - chars for table names, maybe not neccessary
             _function = functionUri.Replace("{sourceId}",sourceId).Replace("{days}",numDays.ToString());
