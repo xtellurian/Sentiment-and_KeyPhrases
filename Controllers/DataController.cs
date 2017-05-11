@@ -35,10 +35,10 @@ namespace Sentiment_And_KeyPhrases.Controllers
 
         public async Task<IActionResult> AllSources ()
         {
-            var data = await _manager.GetLatest();
-            var jobj = new JObject();
-            jobj["data"] = JToken.FromObject(data.Sources);
-            return Ok(jobj);
+            var uri = ConfigurationWrapper.Config["GetSourcesUri"];
+            var function = new GetSources(uri);
+            var data = await function.Run();
+            return Ok(data);
         }
 
         public async Task<IActionResult> Refresh()
