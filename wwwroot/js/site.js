@@ -43,8 +43,36 @@ function between(x, min, max) {
 }
 
 function topicsTable(){
+  var path = '../data/trendingtopics/';
   var table = $('#topics').DataTable({
-    
+    "ajax": path,
+    "columnDefs": [ 
+      {
+        "targets":0,
+        'responsivePriority': 5
+      },
+      {
+      "targets": 1,
+      "data": null,
+      "responsivePriority": 1,
+      "render": function ( data, type, full, meta ) {
+        return '<a href="topics/detail/'+full.id+'">' + data + '</a>';
+      }
+    },
+    {
+      "targets": 2,
+      "data": null,
+      "responsivePriority": 2,
+      "render": function ( data, type, full, meta ) {
+        return (data*100).toFixed(1).toString() + '%';
+      }
+    }
+    ],
+    "columns": [
+      { "data": "score" },
+      { "data": "keyPhrase"},
+      { "data": "averageSentiment" }
+    ]
   });
  
   table
@@ -52,6 +80,25 @@ function topicsTable(){
       .order( 'desc' )
       .draw();
 }
+
+function allSourcesTable(){
+  var path = '../data/allsources'
+  $('#sources').DataTable( {
+    "ajax": path,
+    "columnDefs": [ {
+      "targets": 0,
+      "responsivePriority": 1,
+      "data": null,
+      "render": function ( data, type, full, meta ) {
+        return '<a href="sources/detail/'+full.Id+'">' + data + '</a>';
+      }
+    }],
+    "columns": [
+      { "data": "Name" },
+      { "data": "Description" }
+    ]
+  } );
+} 
 
 function articlesTable(){
   var table = $('#articles').DataTable();
@@ -62,10 +109,28 @@ function articlesTable(){
   //     .draw();
 }
 
-function sourceDetailTable() {
-  var path = '../../data/source/'.concat('@sourceId')
+function sourceDetailTable(sourceId) {
+  var path = '../../data/source/'.concat(sourceId);
   $('#sources').DataTable( {
     "ajax": path,
+    "columnDefs": [
+      {
+        "targets":0,
+        "responsivePriority": 1
+      },
+      {
+        "targets":1,
+        "responsivePriority": 3
+      },
+      {
+      "targets": 3,
+      "responsivePriority": 2,
+      "data": null,
+      "render": function ( data, type, full, meta ) {
+        return (data*100).toFixed(1).toString() + '%';
+      }
+    }
+    ],
     "columns": [
       { "data": "Title" },
       { "data": "Author" },

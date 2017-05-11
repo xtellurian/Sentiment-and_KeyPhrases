@@ -3,7 +3,9 @@
 {
     @{var sourceId = @ViewData["SourceId"];}
     <script>
-        $(document).ready(sourceDetailTable );
+        $(document).ready(function() {
+            sourceDetailTable('@sourceId');
+        });
     </script>
 
 }
@@ -16,7 +18,7 @@
         <h4><a href="javascript:void(0);" onclick="history.go(-1);">Back</a></h4>
     </div>
 </div>
-<table id="sources" class="display table">
+<table id="sources" class="display table responsive" width="100%">
     <thead>
         <tr >
                 <th>

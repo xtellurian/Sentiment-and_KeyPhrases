@@ -16,41 +16,22 @@
 
 <h2>Trending Topics</h2>
 <h4>Created @numberOfMinutes minutes ago</h4>
-<table id= "topics" class="display table">
-    <thead>
-        <tr>
-                <th>
-                    Score
-                </th>
-                <th>
-                    Key Phrase
-                </th>
-                <th>
-                    Average Sentiment
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var topic in orderedTopics) {
-        <tr data-color="@topic.AverageSentiment">
-            <td>
-                @Html.DisplayFor(modelItem => topic.Score)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => topic.KeyPhrase)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => topic.AverageSentiment)
-            </td>
-            <td>
-                <a asp-action="detail" asp-route-id="@topic.Id">Details</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-
 <div>
-
+    <table id= "topics" class="display table responsive">
+        <thead>
+            <tr>
+                    <th>
+                        Score
+                    </th>
+                    <th>
+                        Key Phrase
+                    </th>
+                    <th>
+                        Average Sentiment
+                    </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 </div>

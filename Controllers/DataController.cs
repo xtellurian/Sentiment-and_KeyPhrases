@@ -26,6 +26,13 @@ namespace Sentiment_And_KeyPhrases.Controllers
 
         }
 
+        public async Task<IActionResult> TrendingTopics()
+        {
+            var data = await _manager.GetLatest();
+            var topics = data.Topics;
+            return Ok(new ResultClass(){Data = topics});
+        }
+
         public async Task<IActionResult> Source (string id)
         {
             var uri = ConfigurationWrapper.Config["ArticlesFromSourceUri"];
@@ -44,6 +51,8 @@ namespace Sentiment_And_KeyPhrases.Controllers
             var data = await function.Run();
             return Ok(data);
         }
+
+
 
         public async Task<IActionResult> Refresh()
         {
@@ -68,6 +77,12 @@ namespace Sentiment_And_KeyPhrases.Controllers
         public IActionResult Error()
         {
             return View();
+        }
+
+        public class ResultClass 
+        {
+            [JsonPropertyAttribute("data")]
+            public dynamic Data {get;set;}
         }
 
     }

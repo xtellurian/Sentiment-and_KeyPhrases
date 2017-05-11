@@ -22,7 +22,7 @@ namespace Sentiment_And_KeyPhrases.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            
+            ViewData["Title"] = "Sources";
             return View();
         }
 
@@ -32,7 +32,7 @@ namespace Sentiment_And_KeyPhrases.Controllers
             var data = await _manager.GetLatest();
 
 
-            ViewData["title"] = data.Sources.FirstOrDefault(s=>s.id == id).name;
+            ViewData["Title"] = data.Sources.FirstOrDefault(s=>s.id == id).name;
             ViewData["SourceId"] = id;
             return View();
         }
