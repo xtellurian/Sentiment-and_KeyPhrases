@@ -9,13 +9,14 @@
 @section Scripts {
     <script type="text/javascript">
     // Write your Javascript code.
- $(document).ready(colorRows);
+    // $(document).ready(colorRows);
+    $(document).ready(topicsTable);
     </script>
 }
 
-<h2>Current Topics</h2>
+<h2>Trending Topics</h2>
 <h4>Created @numberOfMinutes minutes ago</h4>
-<table class="table">
+<table id= "topics" class="display table">
     <thead>
         <tr>
                 <th>

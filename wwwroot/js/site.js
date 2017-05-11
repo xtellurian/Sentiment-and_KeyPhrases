@@ -29,7 +29,7 @@ function between(x, min, max) {
         first = parseFloat(name.split('-')[0]);
         second = parseFloat(name.split('-')[1]);
         
-        console.log(between(dc, first, second));
+        // console.log(between(dc, first, second));
         
         if( between(dc, first, second) ){
           th.addClass(value);
@@ -40,4 +40,22 @@ function between(x, min, max) {
       });
     
   });
+}
+
+function topicsTable(){
+  var table = $('#topics').DataTable();
+ 
+  table
+      .column( '0:visible' )
+      .order( 'desc' )
+      .draw();
+}
+
+function articlesTable(){
+  var table = $('#articles').DataTable();
+ 
+  // table
+  //     .column( '0:visible' )
+  //     .order( 'desc' )
+  //     .draw();
 }

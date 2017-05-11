@@ -34,3 +34,6 @@ msbuild.wrn
 
 #secrets
 *.key
+
+#node modules
+node_modules/
