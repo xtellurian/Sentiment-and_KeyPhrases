@@ -37,7 +37,7 @@ namespace Sentiment_And_KeyPhrases.Controllers
         {
             var uri = ConfigurationWrapper.Config["ArticlesFromSourceUri"];
             var days = Request.Query["days"];
-            int numDays = 1;
+            int numDays = 7; // defaults to one week
             int.TryParse(days, NumberStyles.Integer , null, out numDays);
             var function = new GetArticlesFromSource(uri, id, numDays);
             var result = await function.Run();
