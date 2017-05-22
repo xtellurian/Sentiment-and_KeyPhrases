@@ -42,6 +42,7 @@ namespace Sentiment_And_KeyPhrases.Controllers
         public IActionResult Trend(string id)
         {
             ViewData["id"] = id;
+            ViewData["Title"] = "Trends: " + id;
             return View();
         }
 
