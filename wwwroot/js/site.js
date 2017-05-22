@@ -139,3 +139,65 @@ function sourceDetailTable(sourceId) {
     ]
   } );
 }
+
+function loadTrendPlot(id) {
+    var url = "../../Data/Trend/" + id
+
+    function loadData(dates, nums, sentiment)
+    {
+        var data = [
+            {
+                x: dates,
+                y: nums,
+                name: 'Count',
+                type: 'scatter'
+            },
+            {
+                x: dates,
+                y: sentiment,
+                name: 'Sentiment',
+                yaxis: 'y2',
+                type: 'scatter'
+            }
+    ];
+
+    var layout = {
+        title: id,
+        xaxis: {
+            title: 'Date',
+            showgrid: true,
+            zeroline: false
+        },
+        yaxis: {
+            title: 'Reference Count',
+            showline: false
+            },
+        yaxis2: {
+            title: 'Sentiment',
+            titlefont: {color: 'rgb(148, 103, 189)'},
+            tickfont: {color: 'rgb(148, 103, 189)'},
+            overlaying: 'y',
+            side: 'right'
+        }
+        };
+
+    Plotly.newPlot('myDiv', data, layout);
+    $( ".loader" ).remove();
+    }
+
+    var xvals = []
+    var yvals = []
+    var sentiment = [];
+
+    $.ajax({ url: url,
+            context: document.body,
+            success: function(result){
+                result.data.forEach(function callback(val, index, array) {
+                    xvals.push(val.Day)
+                    yvals.push(val.Num)
+                    sentiment.push(val.AverageSentiment)
+                });
+                loadData(xvals, yvals, sentiment);
+            }});
+    
+}

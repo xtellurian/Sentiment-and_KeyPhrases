@@ -5,6 +5,7 @@
     // Write your Javascript code.
  $(document).ready(articlesTable);
     </script>
+
 }
 
 <div>
@@ -44,3 +45,7 @@
 }
     </tbody>
 </table>
+
+@{var link = "../trend/" + @ViewData["Title"];}
+
+<a href='@link' class="btn btn-primary" role="button">Plot Trend</a>

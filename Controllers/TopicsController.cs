@@ -39,6 +39,12 @@ namespace Sentiment_And_KeyPhrases.Controllers
             return View(articles);
         }
 
+        public IActionResult Trend(string id)
+        {
+            ViewData["id"] = id;
+            return View();
+        }
+
       
         public IActionResult Error()
         {

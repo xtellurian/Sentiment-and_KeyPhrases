@@ -1,0 +1,18 @@
+@section Scripts
+{
+
+<script>
+    $(document).ready(function() {
+        var id = "@ViewData["id"]";
+        loadTrendPlot(id);
+    })
+   
+    </script>
+
+}
+
+
+ <div id="loader" class="loader top-margin col-centered"></div>
+<!-- Plotly chart will be drawn inside this DIV -->
+<div id="myDiv"></div>
+

@@ -49,7 +49,7 @@ namespace Sentiment_And_KeyPhrases.Controllers
         }
 
 
-        public async Task<IActionResult> KeyphraseHistory(string id)
+        public async Task<IActionResult> Trend(string id)
         {
             var uri = ConfigurationWrapper.Config["TrendPhraseUri"];
             var function = new GetKeyphraseTrend(uri, id);
