@@ -30,7 +30,7 @@ namespace Sentiment_And_KeyPhrases.Controllers
         {
             var data = await _manager.GetLatest();
             var topics = data.Topics;
-            return Ok(new ResultClass(){Data = topics});
+            return Ok(new {data = topics});
         }
 
         public async Task<IActionResult> Source (string id)
@@ -46,6 +46,15 @@ namespace Sentiment_And_KeyPhrases.Controllers
             var function = new GetArticlesFromSource(uri, id, numDays);
             var result = await function.Run();
             return Ok(result);
+        }
+
+
+        public async Task<IActionResult> KeyphraseHistory(string id)
+        {
+            var uri = ConfigurationWrapper.Config["TrendPhraseUri"];
+            var function = new GetKeyphraseTrend(uri, id);
+            var data = await function.Run();
+            return Ok(data);
         }
 
         public async Task<IActionResult> AllSources ()
@@ -81,12 +90,6 @@ namespace Sentiment_And_KeyPhrases.Controllers
         public IActionResult Error()
         {
             return View();
-        }
-
-        public class ResultClass 
-        {
-            [JsonPropertyAttribute("data")]
-            public dynamic Data {get;set;}
         }
 
     }
